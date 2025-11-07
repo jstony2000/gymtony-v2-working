@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymTony V2.4.3 - Actualización</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 400px;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .update-btn {
+            background: white;
+            color: #dc2626;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+        }
+        .update-btn:hover {
+            background: #f3f4f6;
+        }
+        .features {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .features li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ GymTony V2.4.3</h1>
+        <h2>Actualización Disponible</h2>
+        <p>¡Nueva versión con logo rojo y botones corregidos!</p>
+        
+        <div class="features">
+            <h3>✨ Novedades:</h3>
+            <ul>
+                <li>🎨 Logo rojo en todos los tamaños</li>
+                <li>📍 Botones reposicionados</li>
+                <li>🔄 Actualizaciones automáticas</li>
+                <li>📱 PWA optimizada</li>
+            </ul>
+        </div>
+        
+        <button class="update-btn" onclick="updateApp()">🔄 Actualizar Ahora</button>
+        <button class="update-btn" onclick="openPWA()">📱 Abrir PWA</button>
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('Service Worker registrado');
+                })
+                .catch(err => console.log('Error:', err));
+        }
+
+        function updateApp() {
+            const status = document.getElementById('status');
+            status.innerHTML = '🔄 Actualizando...';
+            
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(registration => {
+                    if (registration) {
+                        registration.update();
+                        setTimeout(() => {
+                            status.innerHTML = '✅ Actualización iniciada';
+                            setTimeout(() => {
+                                window.location.href = '/';
+                            }, 2000);
+                        }, 1000);
+                    } else {
+                        window.location.href = '/';
+                    }
+                });
+            } else {
+                window.location.href = '/';
+            }
+        }
+
+        function openPWA() {
+            window.location.href = '/';
+        }
+
+        // Auto-redirigir después de 10 segundos
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 10000);
+    </script>
+</body>
+</html>

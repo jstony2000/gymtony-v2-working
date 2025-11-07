@@ -1,0 +1,77 @@
+/* Estilos CSS para el tema rojo de GymTony en móvil */
+:root {
+  --gymtony-red: #dc2626;
+  --gymtony-red-dark: #b91c1c;
+  --gymtony-red-light: #f87171;
+}
+
+/* PWA instalado - Colores de la barra de estado */
+@media (display-mode: standalone) {
+  body {
+    background-color: var(--gymtony-red);
+    color: white;
+  }
+}
+
+/* Meta theme color para navegadores */
+* {
+  box-sizing: border-box;
+}
+
+/* Aplicar tema rojo a elementos principales */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--gymtony-red);
+  color: white;
+}
+
+/* Asegurar que el logo se vea correctamente */
+#root {
+  background: linear-gradient(135deg, var(--gymtony-red) 0%, var(--gymtony-red-dark) 100%);
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+/* Optimización para dispositivos móviles */
+@media (max-width: 768px) {
+  body {
+    background-color: var(--gymtony-red);
+  }
+  
+  /* Mejorar legibilidad en pantallas pequeñas */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Colores de botones y elementos interactivos */
+button, .btn {
+  background-color: var(--gymtony-red);
+  border-color: var(--gymtony-red);
+}
+
+button:hover, .btn:hover {
+  background-color: var(--gymtony-red-dark);
+  border-color: var(--gymtony-red-dark);
+}
+
+/* Colores de enlaces */
+a {
+  color: var(--gymtony-red-light);
+}
+
+a:hover {
+  color: white;
+}
+
+/* Safe area para notch de iPhone */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+}

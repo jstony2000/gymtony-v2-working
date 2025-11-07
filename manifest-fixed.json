@@ -1,0 +1,79 @@
+{
+  "name": "GymTony V2.4.3",
+  "shortName": "GymTony", 
+  "description": "Tu Entrenador Personal",
+  "startUrl": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "themeColor": "#dc2626",
+  "backgroundColor": "#dc2626",
+  "id": "com.gymtony.app.v2.4.3",
+  "version": "2.4.3",
+  "lang": "es",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/logo-red-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-red-96x96.png", 
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-red-128x128.png",
+      "sizes": "128x128", 
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-red-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png", 
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-red-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-red-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-red-384x384.png", 
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-red-512x512.png",
+      "sizes": "512x512", 
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Entrenar",
+      "short_name": "Entrenar",
+      "description": "Iniciar entrenamiento",
+      "url": "/?action=entrenar",
+      "icons": [
+        {
+          "src": "/logo-red-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

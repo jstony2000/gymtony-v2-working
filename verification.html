@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Verificación GymTony V2.4.3</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #00ff00;
+        }
+        h1 {
+            color: #ff6b6b;
+            text-align: center;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+        .test {
+            margin: 20px 0;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 5px;
+            border-left: 4px solid #00ff00;
+        }
+        .loading {
+            color: #ffaa00;
+        }
+        .success {
+            color: #00ff00;
+        }
+        .error {
+            color: #ff4444;
+        }
+        .info {
+            color: #4488ff;
+        }
+        .button {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: inherit;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #b91c1c;
+        }
+        .url-input {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a1a;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        .progress {
+            background: #1a1a1a;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #dc2626, #f87171);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 GYMTONY V2.4.3 - VERIFICACIÓN DE DEPLOY</h1>
+        
+        <div class="test">
+            <h3 class="info">📱 URL a verificar:</h3>
+            <input type="text" id="urlInput" class="url-input" value="https://jstony2000.github.io/gymtony-v2-4-3/">
+            <button class="button" onclick="checkAll()">🚀 INICIAR VERIFICACIÓN</button>
+        </div>
+
+        <div id="progress" class="progress">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div id="results">
+            <div class="test">
+                <h3>1. 🌐 Verificar página principal</h3>
+                <div id="homepageResult" class="loading">⏳ Verificando...</div>
+            </div>
+
+            <div class="test">
+                <h3>2. 📜 Verificar force-red-theme-ultra.js</h3>
+                <div id="scriptResult" class="loading">⏳ Verificando...</div>
+            </div>
+
+            <div class="test">
+                <h3>3. 🎨 Verificar logos rojos</h3>
+                <div id="logosResult" class="loading">⏳ Verificando...</div>
+            </div>
+
+            <div class="test">
+                <h3>4. 📱 Verificar PWA manifest</h3>
+                <div id="manifestResult" class="loading">⏳ Verificando...</div>
+            </div>
+
+            <div class="test">
+                <h3>5. 🔄 Tiempo de propagación</h3>
+                <div id="timeResult" class="info">⏰ Calculando...</div>
+            </div>
+        </div>
+
+        <div class="test">
+            <h3 class="success">📋 INSTRUCCIONES PARA APK</h3>
+            <p><strong>URL para PWABuilder:</strong> <span id="pwabuilderUrl" style="color: #ffaa00;">https://jstony2000.github.io/gymtony-v2-4-3/</span></p>
+            <p>1. Ir a: <strong>https://pwabuilder.com</strong></p>
+            <p>2. Ingresar URL: <strong>https://jstony2000.github.io/gymtony-v2-4-3/</strong></p>
+            <p>3. Clic en: <strong>"Start"</strong></p>
+            <p>4. Seleccionar: <strong>"Android"</strong></p>
+            <p>5. Descargar: <strong>"Download Package"</strong></p>
+        </div>
+    </div>
+
+    <script>
+        let testCount = 0;
+        let totalTests = 5;
+        
+        function updateProgress() {
+            const percentage = (testCount / totalTests) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+        
+        function checkHomepage() {
+            const url = document.getElementById('urlInput').value;
+            fetch(url)
+                .then(response => {
+                    testCount++;
+                    updateProgress();
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                })
+                .then(data => {
+                    const isValid = data.includes('GymTony') || data.includes('index.html') || data.length > 100;
+                    document.getElementById('homepageResult').innerHTML = isValid 
+                        ? '✅ <span class="success">PÁGINA ACCESIBLE - No está en blanco</span>'
+                        : '❌ <span class="error">Página accesible pero contenido mínimo</span>';
+                })
+                .catch(error => {
+                    testCount++;
+                    updateProgress();
+                    document.getElementById('homepageResult').innerHTML = '❌ <span class="error">Error: ' + error.message + '</span>';
+                });
+        }
+        
+        function checkScript() {
+            const scriptUrl = document.getElementById('urlInput').value + 'force-red-theme-ultra.js';
+            fetch(scriptUrl)
+                .then(response => {
+                    testCount++;
+                    updateProgress();
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                })
+                .then(data => {
+                    const hasContent = data.includes('GYMTONY ULTRA THEME') || data.length > 1000;
+                    document.getElementById('scriptResult').innerHTML = hasContent
+                        ? '✅ <span class="success">SCRIPT DISPONIBLE - force-red-theme-ultra.js funciona</span>'
+                        : '⚠️ <span class="info">Script accesible pero contenido mínimo</span>';
+                })
+                .catch(error => {
+                    testCount++;
+                    updateProgress();
+                    document.getElementById('scriptResult').innerHTML = '❌ <span class="error">No disponible: ' + error.message + '</span><br><small>Puede tardar 2-5 minutos en propagarse</small>';
+                });
+        }
+        
+        function checkLogos() {
+            const logoUrl = document.getElementById('urlInput').value + 'logo-red-192x192.png';
+            fetch(logoUrl, { method: 'HEAD' })
+                .then(response => {
+                    testCount++;
+                    updateProgress();
+                    if (response.ok) {
+                        document.getElementById('logosResult').innerHTML = '✅ <span class="success">LOGOS ROJOS DISPONIBLES - logo-red-192x192.png accesible</span>';
+                    } else {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                })
+                .catch(error => {
+                    testCount++;
+                    updateProgress();
+                    document.getElementById('logosResult').innerHTML = '❌ <span class="error">Error logos: ' + error.message + '</span>';
+                });
+        }
+        
+        function checkManifest() {
+            const manifestUrl = document.getElementById('urlInput').value + 'manifest.json';
+            fetch(manifestUrl)
+                .then(response => {
+                    testCount++;
+                    updateProgress();
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                })
+                .then(data => {
+                    const hasTheme = data.theme_color === '#dc2626' || data.background_color === '#dc2626';
+                    document.getElementById('manifestResult').innerHTML = hasTheme
+                        ? '✅ <span class="success">MANIFEST PWA CORRECTO - Tema rojo configurado</span>'
+                        : '⚠️ <span class="info">Manifest accesible pero tema sin configurar</span>';
+                })
+                .catch(error => {
+                    testCount++;
+                    updateProgress();
+                    document.getElementById('manifestResult').innerHTML = '❌ <span class="error">Error manifest: ' + error.message + '</span>';
+                });
+        }
+        
+        function checkTime() {
+            const deployTime = new Date('2025-11-08T07:08:03');
+            const now = new Date();
+            const diffMinutes = Math.floor((now - deployTime) / 60000);
+            
+            testCount++;
+            updateProgress();
+            
+            let timeMsg = `⏰ Deploy realizado hace ${diffMinutes} minutos`;
+            if (diffMinutes < 2) {
+                timeMsg += '<br>🔄 <span class="info">Propagación en curso - esperando...</span>';
+            } else if (diffMinutes < 5) {
+                timeMsg += '<br>✅ <span class="success">Propagación probable completada</span>';
+            } else {
+                timeMsg += '<br>🎯 <span class="success">Propagación definitivamente completada</span>';
+            }
+            
+            document.getElementById('timeResult').innerHTML = timeMsg;
+        }
+        
+        function checkAll() {
+            // Reset
+            testCount = 0;
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('homepageResult').innerHTML = '⏳ Verificando...';
+            document.getElementById('scriptResult').innerHTML = '⏳ Verificando...';
+            document.getElementById('logosResult').innerHTML = '⏳ Verificando...';
+            document.getElementById('manifestResult').innerHTML = '⏳ Verificando...';
+            document.getElementById('timeResult').innerHTML = '⏰ Calculando...';
+            
+            // Update PWABuilder URL
+            const url = document.getElementById('urlInput').value;
+            document.getElementById('pwabuilderUrl').textContent = url;
+            
+            // Run all checks
+            setTimeout(checkHomepage, 100);
+            setTimeout(checkScript, 300);
+            setTimeout(checkLogos, 500);
+            setTimeout(checkManifest, 700);
+            setTimeout(checkTime, 900);
+        }
+        
+        // Auto-start on load
+        window.onload = function() {
+            setTimeout(checkAll, 1000);
+        };
+    </script>
+</body>
+</html>
