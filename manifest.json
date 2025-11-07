@@ -1,7 +1,7 @@
 {
   "name": "GymTony V2.4.3 - Tu Entrenador Personal",
   "short_name": "GymTony",
-  "description": "Aplicación de entrenamiento personalizada - Icono rojo para miniatura móvil",
+  "description": "Tu entrenador personal con más de 60 ejercicios de gimnasio. Guía completa de entrenamiento con imágenes animadas.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#dc2626",
@@ -9,6 +9,9 @@
   "orientation": "portrait",
   "scope": "/",
   "prefer_related_applications": false,
+  "categories": ["fitness", "health", "sports"],
+  "lang": "es",
+  "dir": "ltr",
   "id": "gymtony-v2.4.3-red",
   "version": "2.4.3",
   "edge_side_panel": {
