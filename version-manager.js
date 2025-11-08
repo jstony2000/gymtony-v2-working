@@ -181,6 +181,50 @@ function addToChangelog(newVersion, changeDescription) {
 }
 
 /**
+ * 📱 Actualizar página principal con nueva versión
+ */
+function updateMainPageWithVersion(version) {
+  try {
+    // Crear componente de versión para la página
+    const versionComponent = createVersionComponentForPage(version);
+    
+    // Añadir al HTML de la página principal si es posible
+    const indexPath = 'index.html';
+    if (fs.existsSync(indexPath)) {
+      let indexContent = fs.readFileSync(indexPath, 'utf8');
+      
+      // Buscar el div root y añadir el componente después
+      if (indexContent.includes('<div id="root">')) {
+        const versionScript = `\n    <!-- Componente de versión GymTony V${version.version} -->\n    <div class="gymtony-version" onclick="showGymtonyVersionInfo()" title="Ver información de la versión">\n      <div class="gymtony-version-badge">\n        <span>GymTony V${version.version}</span>\n      </div>\n    </div>\n    <script>\n      const GYMTONY_VERSION = ${JSON.stringify(version, null, 2)};\n      \n      function showGymtonyVersionInfo() {\n        const overlay = document.createElement('div');\n        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;backdrop-filter:blur(4px);';\n        overlay.onclick = () => { overlay.remove(); modal.remove(); document.body.style.overflow=''; };\n        \n        const modal = document.createElement('div');\n        modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.3);z-index:10000;max-width:350px;width:90%;font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif;overflow:hidden;';\n        \n        modal.innerHTML = \\`\n          <div style="background:linear-gradient(135deg,#dc2626,#b91c1c);color:white;padding:20px;text-align:center;position:relative;">\n            <button onclick="this.parentNode.parentNode.parentNode.remove()" style="position:absolute;top:10px;right:15px;background:none;border:none;color:white;font-size:24px;cursor:pointer;">×</button>\n            <h3 style="margin:0;font-size:20px;font-weight:700;">🏷️ GymTony V2</h3>\n          </div>\n          <div style="padding:20px;">\n            <div style="margin-bottom:15px;"><div style="font-weight:600;color:#374151;font-size:14px;margin-bottom:4px;">📍 Versión</div><div style="color:#6b7280;font-size:13px;padding:6px 10px;background:#f9fafb;border-radius:6px;border:1px solid #e5e7eb;">\\${version.version}</div></div>\n            <div style="margin-bottom:15px;"><div style="font-weight:600;color:#374151;font-size:14px;margin-bottom:4px;">🏷️ Build</div><div style="color:#6b7280;font-size:13px;padding:6px 10px;background:#f9fafb;border-radius:6px;border:1px solid #e5e7eb;">\\${version.build}</div></div>\n            <div style="margin-bottom:15px;"><div style="font-weight:600;color:#374151;font-size:14px;margin-bottom:4px;">📅 Fecha</div><div style="color:#6b7280;font-size:13px;padding:6px 10px;background:#f9fafb;border-radius:6px;border:1px solid #e5e7eb;">\\${version.date}</div></div>\n            <div><div style="font-weight:600;color:#374151;font-size:14px;margin-bottom:4px;">📋 Descripción</div><div style="color:#6b7280;font-size:13px;padding:6px 10px;background:#f9fafb;border-radius:6px;border:1px solid #e5e7eb;">\\${version.description}</div></div>\n          </div>\n          <div style="padding:15px 20px;background:#f9fafb;text-align:center;font-size:12px;color:#6b7280;border-top:1px solid #e5e7eb;">Click fuera o × para cerrar</div>\n        \\`;\n        \n        document.body.appendChild(overlay);\n        document.body.appendChild(modal);\n        document.body.style.overflow = 'hidden';\n        \n        setTimeout(() => { if (document.body.contains(overlay)) { overlay.remove(); modal.remove(); document.body.style.overflow=''; } }, 10000);\n      }\n      \n      console.log('🎉 GymTony V' + version.version + ' (Build ' + version.build + ') cargado');\n    </script>\n`;
+        
+        // Insertar antes del cierre del body
+        indexContent = indexContent.replace('</body>', versionScript + '\n  </body>');
+        
+        fs.writeFileSync(indexPath, indexContent);
+        return { success: true, message: 'Componente de versión añadido a index.html' };
+      }
+    }
+    
+    return { success: false, message: 'No se pudo modificar index.html' };
+  } catch (error) {
+    return { success: false, message: `Error: ${error.message}` };
+  }
+}
+
+/**
+ * 🏗️ Crear componente de versión para la página
+ */
+function createVersionComponentForPage(version) {
+  return {
+    version: version.version,
+    build: version.build,
+    codeName: version.codeName,
+    date: version.date,
+    description: version.description
+  };
+}
+
+/**
  * 🚀 Función principal de incremento de versión
  */
 function incrementVersionAndDeploy(incrementType, description) {
@@ -225,6 +269,15 @@ function incrementVersionAndDeploy(incrementType, description) {
 
   // 🌍 Actualizar archivos
   const results = updateFiles(newVersion);
+
+  // 📱 Actualizar página principal con nueva versión
+  console.log('\n📱 Actualizando página principal...');
+  const pageUpdateResult = updateMainPageWithVersion(newVersion);
+  if (pageUpdateResult.success) {
+    console.log('   ✅ Página principal actualizada');
+  } else {
+    console.log('   ⚠️  Página principal:', pageUpdateResult.message);
+  }
 
   // 📊 Mostrar resumen
   console.log(`🎉 ¡Versión actualizada!`);

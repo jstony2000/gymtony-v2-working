@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GymTony V2.4.4</title>
+  <style>
+    /* 🎯 CSS para el componente de versión */
+    .gymtony-version {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      z-index: 9999;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    .gymtony-version:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+      background: linear-gradient(135deg, #b91c1c, #dc2626);
+    }
+    
+    .gymtony-version:active {
+      transform: translateY(0);
+    }
+    
+    .gymtony-version-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .gymtony-version-icon {
+      width: 12px;
+      height: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      position: relative;
+    }
+    
+    .gymtony-version-icon::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 6px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+    }
+    
+    .gymtony-version-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+      max-width: 350px;
+      width: 90%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      overflow: hidden;
+      border: 1px solid rgba(220, 38, 38, 0.1);
+    }
+    
+    .gymtony-version-modal-header {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .gymtony-version-modal-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .gymtony-version-modal-body {
+      padding: 20px;
+    }
+    
+    .gymtony-version-info {
+      margin-bottom: 15px;
+    }
+    
+    .gymtony-version-info-label {
+      font-weight: 600;
+      color: #374151;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    
+    .gymtony-version-info-value {
+      color: #6b7280;
+      font-size: 13px;
+      padding: 6px 10px;
+      background: #f9fafb;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+    
+    .gymtony-version-modal-footer {
+      padding: 15px 20px;
+      background: #f9fafb;
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .gymtony-version-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+    }
+    
+    .gymtony-version-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+    }
+    
+    .gymtony-version-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Responsive */
+    @media (max-width: 480px) {
+      .gymtony-version {
+        bottom: 10px;
+        right: 10px;
+        padding: 6px 10px;
+        font-size: 10px;
+      }
+      
+      .gymtony-version-modal {
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Contenido principal de la aplicación -->
+  <div id="root"></div>
+  
+  <!-- 🎯 Componente de versión GymTony V2 -->
+  <div class="gymtony-version" onclick="showGymtonyVersionInfo()">
+    <div class="gymtony-version-badge">
+      <div class="gymtony-version-icon"></div>
+      <span>GymTony V2.4.4</span>
+    </div>
+  </div>
+
+  <script>
+    // 🎯 Información de la versión actual
+    const GYMTONY_VERSION = {
+      version: "2.4.4",
+      build: "1",
+      codeName: "nav-fix-release",
+      date: "2025-11-08",
+      description: "Sistema de versionado automático - GitHub Pages optimizado",
+      author: "MiniMax Agent"
+    };
+    
+    // 🖥️ Función para mostrar información de versión
+    function showGymtonyVersionInfo() {
+      // Crear overlay
+      const overlay = document.createElement('div');
+      overlay.className = 'gymtony-version-overlay';
+      overlay.onclick = hideGymtonyVersionInfo;
+      
+      // Crear modal
+      const modal = document.createElement('div');
+      modal.className = 'gymtony-version-modal';
+      
+      modal.innerHTML = `
+        <div class="gymtony-version-modal-header">
+          <button class="gymtony-version-close" onclick="hideGymtonyVersionInfo()">×</button>
+          <h3 class="gymtony-version-modal-title">🏷️ GymTony V2</h3>
+        </div>
+        <div class="gymtony-version-modal-body">
+          <div class="gymtony-version-info">
+            <div class="gymtony-version-info-label">📍 Versión</div>
+            <div class="gymtony-version-info-value">${GYMTONY_VERSION.version}</div>
+          </div>
+          <div class="gymtony-version-info">
+            <div class="gymtony-version-info-label">🏷️ Build</div>
+            <div class="gymtony-version-info-value">${GYMTONY_VERSION.build}</div>
+          </div>
+          <div class="gymtony-version-info">
+            <div class="gymtony-version-info-label">📅 Fecha</div>
+            <div class="gymtony-version-info-value">${GYMTONY_VERSION.date}</div>
+          </div>
+          <div class="gymtony-version-info">
+            <div class="gymtony-version-info-label">📋 Descripción</div>
+            <div class="gymtony-version-info-value">${GYMTONY_VERSION.description}</div>
+          </div>
+        </div>
+        <div class="gymtony-version-modal-footer">
+          Click fuera o × para cerrar
+        </div>
+      `;
+      
+      // Añadir al DOM
+      document.body.appendChild(overlay);
+      document.body.appendChild(modal);
+      
+      // Prevenir scroll del body
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // 🔄 Función para ocultar información de versión
+    function hideGymtonyVersionInfo() {
+      const overlay = document.querySelector('.gymtony-version-overlay');
+      const modal = document.querySelector('.gymtony-version-modal');
+      
+      if (overlay) overlay.remove();
+      if (modal) modal.remove();
+      
+      // Restaurar scroll
+      document.body.style.overflow = '';
+    }
+    
+    // 🎯 Inicialización
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🎉 GymTony V' + GYMTONY_VERSION.version + ' (Build ' + GYMTONY_VERSION.build + ') cargado');
+      
+      // Auto-ocultar después de 10 segundos si se abre accidentalmente
+      setTimeout(() => {
+        if (document.querySelector('.gymtony-version-modal')) {
+          hideGymtonyVersionInfo();
+        }
+      }, 10000);
+    });
+    
+    // 🔥 Mostrar versión en consola para desarrollo
+    console.log('%c💪 GymTony V2.4.4%c Sistema de versionado automático activo', 
+      'background: #dc2626; color: white; padding: 2px 6px; border-radius: 4px; font-weight: bold;',
+      'background: #f3f4f6; color: #374151; padding: 2px 6px; border-radius: 4px; margin-left: 8px;'
+    );
+  </script>
+</body>
+</html>
