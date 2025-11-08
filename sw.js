@@ -1,24 +1,16 @@
-// Service Worker para GymTony PWA - Tema Rojo
-const CACHE_NAME = 'gymtony-v2.4.1-red-v1';
+// Service Worker para GymTony PWA - Versión React V2.4.1
+const CACHE_NAME = 'gymtony-v2.4.1-react';
 const urlsToCache = [
-  './',
-  './index.html',
-  './manifest.json',
-  './logos/PECHO.png',
-  './red-theme.css',
-  './red-theme.js',
-  './button-repositioning.js',
-  './button-positioning.css',
-  './logo-red-72x72.png',
-  './logo-red-96x96.png',
-  './logo-red-128x128.png',
-  './logo-red-144x144.png',
-  './logo-red-152x152.png',
-  './logo-red-192x192.png',
-  './logo-red-384x384.png',
-  './logo-red-512x512.png',
-  './assets/index-Dz4_iI-q.css',
-  './assets/index-FnI7mOub.js'
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/PECHO.png',
+  '/logos/BRAZO.png',
+  '/logos/BRAZO_transparente.png',
+  '/logos/PECHO.png',
+  '/logos/PIERNA.png',
+  '/assets/index-Dz4_iI-q.css',
+  '/assets/index-FnI7mOub.js'
 ];
 
 // Instalar Service Worker

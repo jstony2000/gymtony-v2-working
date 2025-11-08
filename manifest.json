@@ -1,67 +1,57 @@
 {
-  "name": "GymTony V2.4.1 - Velocidad optimizada y mejoras criticas",
+  "name": "GymTony V2.4.1",
   "short_name": "GymTony",
-  "description": "Velocidad optimizada y mejoras criticas",
-  "start_url": "./",
+  "description": "Aplicacion de entrenamiento personalizada - Velocidad optimizada",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#dc2626",
   "theme_color": "#dc2626",
   "orientation": "portrait",
-  "scope": "./",
-  "prefer_related_applications": false,
-  "categories": ["fitness", "health", "sports"],
-  "lang": "es",
-  "dir": "ltr",
-  "id": "gymtony-v2.4.1-red",
-  "version": "2.4.1",
-  "edge_side_panel": {
-    "preferred_width": 400
-  },
   "icons": [
     {
-      "src": "./logo-red-72x72.png",
+      "src": "/PECHO.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./logo-red-96x96.png",
+      "src": "/PECHO.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./logo-red-128x128.png",
+      "src": "/PECHO.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./logo-red-144x144.png",
+      "src": "/PECHO.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./logo-red-152x152.png",
+      "src": "/PECHO.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./logo-red-192x192.png",
+      "src": "/PECHO.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./logo-red-384x384.png",
+      "src": "/PECHO.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./logo-red-512x512.png",
+      "src": "/PECHO.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
