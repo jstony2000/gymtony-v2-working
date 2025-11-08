@@ -1,7 +1,7 @@
 {
-  "name": "GymTony V2.4.3 - Tu Entrenador Personal",
+  "name": "GymTony V2.4.1 - Velocidad optimizada y mejoras criticas",
   "short_name": "GymTony",
-  "description": "Tu entrenador personal con más de 60 ejercicios de gimnasio. Guía completa de entrenamiento con imágenes animadas.",
+  "description": "Velocidad optimizada y mejoras criticas",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#dc2626",
@@ -12,8 +12,8 @@
   "categories": ["fitness", "health", "sports"],
   "lang": "es",
   "dir": "ltr",
-  "id": "gymtony-v2.4.3-red",
-  "version": "2.4.3",
+  "id": "gymtony-v2.4.1-red",
+  "version": "2.4.1",
   "edge_side_panel": {
     "preferred_width": 400
   },

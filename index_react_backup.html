@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="./logo-red-192x192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#dc2626" />
+    <meta name="msapplication-TileColor" content="#dc2626" />
+    <meta name="msapplication-navbutton-color" content="#dc2626" />
+    <meta name="description" content="GymTony V2.4.1 - Velocidad optimizada y mejoras criticas" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GymTony">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="./logo-red-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./logo-red-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="./logo-red-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="./logo-red-512x512.png">
+    <link rel="manifest" href="./manifest.json" />
+    <title>GymTony V2.4.1</title>
+    <script>
+      // Registrar Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('./sw.js')
+            .then(function(registration) {
+              console.log('ServiceWorker registrado con éxito:', registration.scope);
+            }, function(err) {
+              console.log('ServiceWorker falló:', err);
+            });
+        });
+      }
+      
+      // Aplicar tema rojo inmediatamente
+      (function() {
+        'use strict';
+        function applyRedTheme() {
+          const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+          if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', '#dc2626');
+          }
+          document.body.classList.add('gymtony-red-theme');
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', applyRedTheme);
+        } else {
+          applyRedTheme();
+        }
+      })();
+    </script>
+    <script src="./force-red-theme.js"></script>
+    <script src="./red-theme.js"></script>
+    <script src="./button-repositioning.js"></script>
+    <script type="module" crossorigin src="./assets/index-FnI7mOub.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Dz4_iI-q.css">
+    <link rel="stylesheet" href="./red-theme.css">
+    <link rel="stylesheet" href="./button-positioning.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

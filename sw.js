@@ -1,5 +1,5 @@
 // Service Worker para GymTony PWA - Tema Rojo
-const CACHE_NAME = 'gymtony-v2.4.3-red-v2';
+const CACHE_NAME = 'gymtony-v2.4.1-red-v1';
 const urlsToCache = [
   './',
   './index.html',
