@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Imágenes - GymTony V2.4.3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .imagen-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .imagen-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-right: 20px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+        }
+        .imagen-item.rotas {
+            border-color: #ff6b6b;
+            background-color: #ffe0e0;
+        }
+        .imagen-item.exitosas {
+            border-color: #4CAF50;
+            background-color: #e8f5e8;
+        }
+        .status {
+            font-weight: bold;
+            margin-left: 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .status.rotas {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        .status.exitosas {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .url {
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 5px;
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+        .boton-limpiar-cache {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .boton-limpiar-cache:hover {
+            background: #0056b3;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .resultado.exito {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .resultado.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Verificación de Imágenes - GymTony V2.4.3</h1>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="boton-limpiar-cache" onclick="limpiarCache()">🗑️ Limpiar Caché del Navegador</button>
+            <button class="boton-limpiar-cache" onclick="verificarImagenes()">🔄 Verificar Imágenes Nuevamente</button>
+        </div>
+
+        <div id="resultado-general"></div>
+        
+        <h2>Estado de las Imágenes de Grupos Musculares:</h2>
+        
+        <div class="imagen-item" id="item-pecho">
+            <img id="img-pecho" src="/gymtony-v2-working/logos/PECHO.png" alt="PECHO Y ESPALDA" onload="imagenCargada('pecho', true)" onerror="imagenCargada('pecho', false)">
+            <div>
+                <h3>PECHO Y ESPALDA</h3>
+                <div class="url">/gymtony-v2-working/logos/PECHO.png</div>
+                <span class="status" id="status-pecho">⏳ Verificando...</span>
+            </div>
+        </div>
+        
+        <div class="imagen-item" id="item-pierna">
+            <img id="img-pierna" src="/gymtony-v2-working/logos/PIERNA.png" alt="PIERNA Y CORE" onload="imagenCargada('pierna', true)" onerror="imagenCargada('pierna', false)">
+            <div>
+                <h3>PIERNA Y CORE</h3>
+                <div class="url">/gymtony-v2-working/logos/PIERNA.png</div>
+                <span class="status" id="status-pierna">⏳ Verificando...</span>
+            </div>
+        </div>
+        
+        <div class="imagen-item" id="item-brazo">
+            <img id="img-brazo" src="/gymtony-v2-working/logos/BRAZO_transparente.png" alt="BRAZO Y HOMBRO" onload="imagenCargada('brazo', true)" onerror="imagenCargada('brazo', false)">
+            <div>
+                <h3>BRAZO Y HOMBRO</h3>
+                <div class="url">/gymtony-v2-working/logos/BRAZO_transparente.png</div>
+                <span class="status" id="status-brazo">⏳ Verificando...</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let imagenesCargadas = {
+            pecho: null,
+            pierna: null,
+            brazo: null
+        };
+
+        function imagenCargada(tipo, exito) {
+            imagenesCargadas[tipo] = exito;
+            
+            const status = document.getElementById(`status-${tipo}`);
+            const item = document.getElementById(`item-${tipo}`);
+            
+            if (exito) {
+                status.textContent = '✅ Cargada exitosamente';
+                status.className = 'status exitosas';
+                item.className = 'imagen-item exitosas';
+            } else {
+                status.textContent = '❌ Error al cargar';
+                status.className = 'status rotas';
+                item.className = 'imagen-item rotas';
+            }
+            
+            verificarResultadoFinal();
+        }
+
+        function verificarResultadoFinal() {
+            const total = Object.keys(imagenesCargadas).length;
+            const cargadas = Object.values(imagenesCargadas).filter(x => x === true).length;
+            const rotas = Object.values(imagenesCargadas).filter(x => x === false).length;
+            const pendientes = Object.values(imagenesCargadas).filter(x => x === null).length;
+            
+            const resultado = document.getElementById('resultado-general');
+            
+            if (pendientes === 0) {
+                if (cargadas === total) {
+                    resultado.className = 'resultado exito';
+                    resultado.innerHTML = `🎉 ¡PERFECTO! Todas las imágenes están cargando correctamente (${cargadas}/${total})`;
+                } else {
+                    resultado.className = 'resultado error';
+                    resultado.innerHTML = `⚠️ Hay problemas: ${cargadas} cargadas correctamente, ${rotas} con errores de ${total} total`;
+                }
+            }
+        }
+
+        function limpiarCache() {
+            // Limpiar localStorage
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Limpiar service workers
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for(let registration of registrations) {
+                        registration.unregister();
+                    }
+                });
+            }
+            
+            alert('✅ Caché limpiado. Recarga la página para aplicar los cambios.');
+        }
+
+        function verificarImagenes() {
+            // Resetear estados
+            imagenesCargadas = {
+                pecho: null,
+                pierna: null,
+                brazo: null
+            };
+            
+            // Recargar imágenes
+            document.getElementById('img-pecho').src = '/gymtony-v2-working/logos/PECHO.png?' + Date.now();
+            document.getElementById('img-pierna').src = '/gymtony-v2-working/logos/PIERNA.png?' + Date.now();
+            document.getElementById('img-brazo').src = '/gymtony-v2-working/logos/BRAZO_transparente.png?' + Date.now();
+            
+            // Resetear elementos de UI
+            const statusElements = ['pecho', 'pierna', 'brazo'];
+            statusElements.forEach(tipo => {
+                const status = document.getElementById(`status-${tipo}`);
+                const item = document.getElementById(`item-${tipo}`);
+                status.textContent = '⏳ Verificando...';
+                status.className = 'status';
+                item.className = 'imagen-item';
+            });
+        }
+
+        // Inicializar verificación
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(verificarImagenes, 1000);
+        });
+    </script>
+</body>
+</html>
