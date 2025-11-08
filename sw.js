@@ -1,16 +1,16 @@
 // Service Worker para GymTony PWA - Versión React V2.4.1
 const CACHE_NAME = 'gymtony-v2.4.1-react';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/PECHO.png',
-  '/logos/BRAZO.png',
-  '/logos/BRAZO_transparente.png',
-  '/logos/PECHO.png',
-  '/logos/PIERNA.png',
-  '/assets/index-Dz4_iI-q.css',
-  '/assets/index-FnI7mOub.js'
+  './',
+  './index.html',
+  './manifest.json',
+  './PECHO.png',
+  './logos/BRAZO.png',
+  './logos/BRAZO_transparente.png',
+  './logos/PECHO.png',
+  './logos/PIERNA.png',
+  './assets/index-Dz4_iI-q.css',
+  './assets/index-FnI7mOub.js'
 ];
 
 // Instalar Service Worker
