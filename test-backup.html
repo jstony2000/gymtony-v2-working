@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymTony V2.4.6 - Backup Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .nav {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .nav a {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .status {
+            background: rgba(34, 197, 94, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #22c55e;
+        }
+        .error {
+            background: rgba(239, 68, 68, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ef4444;
+        }
+        .debug {
+            background: rgba(59, 130, 246, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ GymTony V2.4.6 - Test de Diagnóstico</h1>
+        
+        <div class="status">
+            <strong>✅ Estado:</strong> Esta es una página de respaldo para diagnosticar el problema de pantalla en blanco.
+        </div>
+        
+        <div class="debug">
+            <strong>🔧 Información de Debug:</strong><br>
+            <span id="debug-info">Cargando información...</span>
+        </div>
+        
+        <div class="nav">
+            <a href="#" onclick="showSection('home')">🏠 Inicio</a>
+            <a href="#" onclick="showSection('training')">💪 Entrenar</a>
+            <a href="#" onclick="showSection('config')">⚙️ Configuración</a>
+        </div>
+        
+        <div class="content" id="content">
+            <h2>¡Bienvenido a GymTony!</h2>
+            <p>Si puedes ver esta página, significa que GitHub Pages está funcionando correctamente.</p>
+            <p>Esto confirma que el problema está en el código React/JavaScript principal, no en la infraestructura de hosting.</p>
+        </div>
+        
+        <div class="content">
+            <h3>🔍 Tests de Diagnóstico:</h3>
+            <button onclick="testJavaScript()">Test JavaScript</button>
+            <button onclick="testLocalStorage()">Test LocalStorage</button>
+            <button onclick="testRouting()">Test Routing</button>
+            <button onclick="testReactLoad()">Intentar Cargar React</button>
+        </div>
+        
+        <div id="results" style="margin-top: 20px;"></div>
+        
+        <div style="margin-top: 30px; text-align: center; font-size: 14px; opacity: 0.8;">
+            <p>Build 7 - Test de Diagnóstico | MiniMax Agent</p>
+        </div>
+    </div>
+
+    <script>
+        // Información de debug
+        function showDebugInfo() {
+            const info = `
+                <strong>URL:</strong> ${window.location.href}<br>
+                <strong>User Agent:</strong> ${navigator.userAgent.substring(0, 100)}...<br>
+                <strong>LocalStorage disponible:</strong> ${typeof(Storage) !== "undefined" ? 'Sí' : 'No'}<br>
+                <strong>JavaScript habilitado:</strong> Sí (¡evidentemente!)<br>
+                <strong>Viewport:</strong> ${window.innerWidth}x${window.innerHeight}<br>
+                <strong>Documento cargado:</strong> ${document.readyState}
+            `;
+            document.getElementById('debug-info').innerHTML = info;
+        }
+        
+        function showSection(section) {
+            const content = document.getElementById('content');
+            const sections = {
+                home: '<h2>🏠 Página de Inicio</h2><p>Contenido de la página principal de GymTony.</p><div class="status">✅ Navegación funcionando</div>',
+                training: '<h2>💪 Entrenamiento</h2><p>Selecciona tu rutina de entrenamiento:</p><ul><li>Pecho y Espalda</li><li>Piernas</li><li>Brazo</li></ul>',
+                config: '<h2>⚙️ Configuración</h2><p>Personaliza tu experiencia:</p><div class="debug">🔧 Modo Oscuro: <button onclick="toggleDarkMode()">Alternar</button></div>'
+            };
+            content.innerHTML = sections[section] || sections.home;
+        }
+        
+        function testJavaScript() {
+            const result = document.getElementById('results');
+            result.innerHTML = '<div class="status">✅ JavaScript funcionando correctamente</div>';
+        }
+        
+        function testLocalStorage() {
+            const result = document.getElementById('results');
+            try {
+                localStorage.setItem('test', 'valor');
+                localStorage.removeItem('test');
+                result.innerHTML = '<div class="status">✅ LocalStorage funcionando</div>';
+            } catch (e) {
+                result.innerHTML = '<div class="error">❌ Error con LocalStorage: ' + e.message + '</div>';
+            }
+        }
+        
+        function testRouting() {
+            const result = document.getElementById('results');
+            result.innerHTML = `
+                <div class="debug">
+                    <strong>🔍 Test de Routing:</strong><br>
+                    <strong>Ruta actual:</strong> ${window.location.pathname}<br>
+                    <strong>Hash:</strong> ${window.location.hash || 'Ninguno'}<br>
+                    <strong>Base URL:</strong> ${window.location.origin}<br>
+                </div>
+            `;
+        }
+        
+        function testReactLoad() {
+            const result = document.getElementById('results');
+            const script = document.createElement('script');
+            script.src = './assets/index-FnI7mOub.js';
+            script.onload = function() {
+                result.innerHTML = '<div class="status">✅ Script de React cargado exitosamente</div>';
+            };
+            script.onerror = function() {
+                result.innerHTML = '<div class="error">❌ Error cargando el script de React. Posible problema de sintaxis o dependencias.</div>';
+            };
+            document.head.appendChild(script);
+        }
+        
+        function toggleDarkMode() {
+            document.body.style.background = document.body.style.background.includes('135deg') ? 
+                'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)' : 
+                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        }
+        
+        // Inicializar información de debug
+        showDebugInfo();
+        setTimeout(showDebugInfo, 1000); // Actualizar después de cargar
+        
+        // Log para consola
+        console.log('GymTony V2.4.6 - Test de Diagnóstico cargado');
+        console.log('URL:', window.location.href);
+        console.log('User Agent:', navigator.userAgent);
+    </script>
+</body>
+</html>
