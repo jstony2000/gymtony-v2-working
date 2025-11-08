@@ -1,6 +1,7 @@
 {
-  "name": "GymTony V2.4.1",
+  "name": "GymTony V2.4.4",
   "short_name": "GymTony",
+  "version": "2.4.4",
   "description": "Aplicacion de entrenamiento personalizada - Velocidad optimizada",
   "start_url": "./",
   "display": "standalone",

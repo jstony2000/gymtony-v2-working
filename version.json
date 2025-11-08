@@ -1,0 +1,21 @@
+{
+  "version": "2.4.4",
+  "build": "1",
+  "codeName": "nav-fix-release",
+  "date": "2025-11-08",
+  "description": "Navegación automática reparada - GitHub Pages optimizado",
+  "changelog": [
+    "✅ Reparación definitiva de navegación automática",
+    "✅ Optimización para GitHub Pages deployment", 
+    "✅ Corrección de lógica de redirección",
+    "✅ Compatibilidad con múltiples rutas válidas"
+  ],
+  "author": "MiniMax Agent",
+  "project": "GymTony V2",
+  "semantic": {
+    "major": 2,
+    "minor": 4,
+    "patch": 4,
+    "build": 1
+  }
+}
