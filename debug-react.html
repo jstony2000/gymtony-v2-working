@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymTony V2.4.6 - Debug Inicialización</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh; 
+            color: white; 
+        }
+        .container { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); }
+        h1 { text-align: center; margin-bottom: 30px; }
+        .log { background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; margin: 10px 0; font-family: monospace; white-space: pre-wrap; }
+        .error { background: rgba(239, 68, 68, 0.3); border-left: 4px solid #ef4444; }
+        .success { background: rgba(34, 197, 94, 0.3); border-left: 4px solid #22c55e; }
+        .info { background: rgba(59, 130, 246, 0.3); border-left: 4px solid #3b82f6; }
+        .warning { background: rgba(234, 179, 8, 0.3); border-left: 4px solid #eab308; }
+        #root { 
+            min-height: 400px; 
+            background: rgba(255,255,255,0.1); 
+            border: 2px dashed rgba(255,255,255,0.3); 
+            border-radius: 10px; 
+            margin: 20px 0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            color: rgba(255,255,255,0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Debug de Inicialización React</h1>
+        
+        <div class="log info">
+            <strong>Estado del Debug:</strong>
+            <div id="status">Iniciando diagnóstico...</div>
+        </div>
+        
+        <div class="log">
+            <strong>Log de Inicialización:</strong>
+            <div id="log"></div>
+        </div>
+        
+        <div id="root">
+            <div>🎯 Este es el elemento ROOT donde debe renderizar React</div>
+        </div>
+        
+        <div class="log" id="test-results"></div>
+    </div>
+
+    <script>
+        const logContainer = document.getElementById('log');
+        const statusContainer = document.getElementById('status');
+        const testResults = document.getElementById('test-results');
+        const rootElement = document.getElementById('root');
+        
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            logContainer.innerHTML += `<div class="log ${type}">[${timestamp}] ${message}</div>`;
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        function updateStatus(message, type = 'info') {
+            statusContainer.innerHTML = `<div class="${type}">${message}</div>`;
+        }
+        
+        // Test 1: Verificar que el elemento ROOT existe
+        function testRootElement() {
+            addLog('🔍 Test 1: Verificando elemento ROOT...', 'info');
+            
+            if (rootElement) {
+                addLog('✅ Elemento ROOT encontrado', 'success');
+                addLog(`   - ID: ${rootElement.id}`, 'info');
+                addLog(`   - Dimensiones: ${rootElement.offsetWidth}x${rootElement.offsetHeight}`, 'info');
+                addLog(`   - Estilo: ${getComputedStyle(rootElement).backgroundColor}`, 'info');
+                return true;
+            } else {
+                addLog('❌ Elemento ROOT no encontrado', 'error');
+                return false;
+            }
+        }
+        
+        // Test 2: Verificar disponibilidad de React globalmente
+        function testReactGlobal() {
+            addLog('🔍 Test 2: Verificando React global...', 'info');
+            
+            if (typeof React !== 'undefined') {
+                addLog('✅ React está disponible globalmente', 'success');
+                addLog(`   - Versión: ${React.version || 'No disponible'}`, 'info');
+                return true;
+            } else {
+                addLog('❌ React no está disponible globalmente', 'error');
+                return false;
+            }
+        }
+        
+        // Test 3: Intentar carga del script de React
+        function testReactScriptLoad() {
+            addLog('🔍 Test 3: Cargando script de React...', 'info');
+            
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = './assets/index-FnI7mOub.js';
+                script.onload = () => {
+                    addLog('✅ Script de React cargado exitosamente', 'success');
+                    
+                    // Test React después de la carga
+                    setTimeout(() => {
+                        if (typeof React !== 'undefined') {
+                            addLog('✅ React disponible después de cargar el script', 'success');
+                            testReactInitialization();
+                        } else {
+                            addLog('❌ React no disponible después de cargar el script', 'error');
+                        }
+                        resolve(true);
+                    }, 100);
+                };
+                
+                script.onerror = () => {
+                    addLog('❌ Error cargando el script de React', 'error');
+                    addLog('   - Posible problema de sintaxis o dependencias', 'warning');
+                    resolve(false);
+                };
+                
+                // Timeout para evitar bloqueo
+                setTimeout(() => {
+                    addLog('⏰ Timeout cargando script de React', 'warning');
+                    resolve(false);
+                }, 10000);
+                
+                document.head.appendChild(script);
+            });
+        }
+        
+        // Test 4: Intentar inicialización de React
+        function testReactInitialization() {
+            addLog('🔍 Test 4: Intentando inicialización de React...', 'info');
+            
+            try {
+                // Verificar si createRoot está disponible
+                if (typeof ReactDOM !== 'undefined' && ReactDOM.createRoot) {
+                    addLog('✅ ReactDOM.createRoot disponible', 'success');
+                    
+                    // Intentar crear el root
+                    const reactRoot = ReactDOM.createRoot(rootElement);
+                    addLog('✅ React root creado exitosamente', 'success');
+                    
+                    // Intentar renderizar un componente simple
+                    const simpleElement = React.createElement('div', null, '✅ React está funcionando!');
+                    reactRoot.render(simpleElement);
+                    addLog('✅ Componente simple renderizado', 'success');
+                    
+                    updateStatus('✅ React inicializado correctamente', 'success');
+                    
+                } else {
+                    addLog('❌ ReactDOM.createRoot no disponible', 'error');
+                    addLog('   - Verificando ReactDOM...', 'info');
+                    if (typeof ReactDOM === 'undefined') {
+                        addLog('   - ReactDOM no está definido', 'error');
+                    } else {
+                        addLog('   - ReactDOM existe pero sin createRoot', 'warning');
+                    }
+                }
+            } catch (error) {
+                addLog('❌ Error en inicialización de React: ' + error.message, 'error');
+                addLog('   - Stack: ' + error.stack, 'warning');
+                updateStatus('❌ Error en inicialización de React', 'error');
+            }
+        }
+        
+        // Test 5: Verificar el comportamiento del render
+        function testRenderBehavior() {
+            addLog('🔍 Test 5: Analizando comportamiento de render...', 'info');
+            
+            // Intentar detectar si el problema es con el render del componente principal
+            setTimeout(() => {
+                if (rootElement.children.length > 1) { // Más que solo el placeholder
+                    addLog('✅ Elemento ROOT fue modificado por React', 'success');
+                } else {
+                    addLog('⚠️ Elemento ROOT no fue modificado - posible problema de render', 'warning');
+                    addLog('   - Posible problema con el JSX del componente principal', 'info');
+                }
+            }, 2000);
+        }
+        
+        // Ejecutar tests de diagnóstico
+        async function runDiagnostics() {
+            updateStatus('Ejecutando diagnósticos...', 'info');
+            addLog('🚀 Iniciando diagnóstico completo de React', 'info');
+            
+            const rootOK = testRootElement();
+            const reactGlobalOK = testReactGlobal();
+            
+            if (rootOK) {
+                const scriptLoaded = await testReactScriptLoad();
+                testRenderBehavior();
+                
+                if (scriptLoaded) {
+                    updateStatus('Diagnóstico completado', 'success');
+                } else {
+                    updateStatus('Problema detectado: Script no se carga', 'error');
+                }
+            } else {
+                updateStatus('Problema crítico: Elemento ROOT no encontrado', 'error');
+            }
+            
+            // Mostrar resumen
+            addLog('📋 RESUMEN DEL DIAGNÓSTICO:', 'info');
+            addLog(`   - Elemento ROOT: ${rootElement ? 'OK' : 'FALLO'}`, rootElement ? 'success' : 'error');
+            addLog(`   - React Global: ${typeof React !== 'undefined' ? 'OK' : 'FALLO'}`, typeof React !== 'undefined' ? 'success' : 'error');
+            addLog(`   - Script React: Pendiente de cargar...`, 'info');
+        }
+        
+        // Iniciar diagnósticos cuando la página cargue
+        document.addEventListener('DOMContentLoaded', () => {
+            addLog('✅ DOM cargado completamente', 'success');
+            runDiagnostics();
+        });
+        
+        // Debug adicional de console
+        console.log('🔧 Debug de Inicialización React iniciado');
+        console.log('Root element:', document.getElementById('root'));
+        console.log('React available:', typeof React !== 'undefined');
+        
+        // Monitorear cambios en el DOM
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.target.id === 'root') {
+                    addLog(`🔄 Cambio detectado en elemento ROOT`, 'info');
+                    addLog(`   - Tipo: ${mutation.type}`, 'info');
+                    addLog(`   - Nodos añadidos: ${mutation.addedNodes.length}`, 'info');
+                    addLog(`   - Nodos removidos: ${mutation.removedNodes.length}`, 'info');
+                }
+            });
+        });
+        
+        observer.observe(rootElement, { 
+            childList: true, 
+            subtree: true, 
+            attributes: true,
+            characterData: true 
+        });
+        
+        addLog('👁️ Observer activado para monitorear cambios en ROOT', 'info');
+    </script>
+</body>
+</html>
