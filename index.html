@@ -5,19 +5,56 @@
     <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#dc2626" />
-    <meta name="description" content="GymTony V 2.4.10 - Tu aplicacion de entrenamiento personalizada" />
+    <meta name="description" content="GymTony V 2.4.10 - FORCED UPDATE - Corrección error 2.github.io - Tu aplicacion de entrenamiento personalizada" />
     <link rel="manifest" href="./manifest.json" />
-    <title>GymTony V 2.4.10</title>
+    <title>GymTony V 2.4.10 - CORRECCIÓN ACTIVA</title>
     <!-- v2.4.10: Error 2.github.io corregido - Redirección automática corregida para GitHub Pages -->
-    <script type="module" crossorigin src="./assets/index-FnI7mOub.js?v=20251110_0950"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Dz4_iI-q.css?v=20251110_0950">
+    <script type="module" crossorigin src="./assets/index-FnI7mOub.js?v=20251110_2102"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Dz4_iI-q.css?v=20251110_2102">
   </head>
   <body>
     <!-- Script para forzar limpieza de cache -->
     <script src="./force-cache-refresh.js"></script>
     
-    <!-- Script de corrección temporal para error 2.github.io -->
+    <!-- Script de corrección FORZADA para error 2.github.io -->
     <script src="./correccion-inmediata-2githubio.js"></script>
+    
+    <!-- Script de corrección inmediata y forzada -->
+    <script>
+        // CORRECCIÓN INMEDIATA - FORCE UPDATE v2.4.10
+        (function() {
+            console.log('🚀 GYMTONY v2.4.10 - FORCED UPDATE ACTIVO');
+            
+            // Actualizar título inmediatamente
+            document.title = 'GymTony V 2.4.10 - CORREGIDO';
+            
+            // Forzar corrección de URL
+            const currentPath = window.location.pathname;
+            const basePath = '/gymtony-v2-working/';
+            
+            if (currentPath !== '/' && !currentPath.startsWith(basePath)) {
+                console.log('🔧 Corrigiendo URL:', currentPath);
+                window.location.replace(basePath);
+            }
+            
+            // Actualizar meta información
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+                metaDesc.setAttribute('content', 'GymTony V 2.4.10 - ERROR 2.github.io CORREGIDO');
+            }
+            
+            // Monitorear renderizado
+            setTimeout(() => {
+                const root = document.getElementById('root');
+                if (!root || root.children.length === 0) {
+                    console.log('🔄 Recargando aplicación...');
+                    window.location.reload(true);
+                } else {
+                    console.log('✅ Aplicación cargada correctamente');
+                }
+            }, 2000);
+        })();
+    </script>
     <div id="root"></div>
   </body>
 </html>
