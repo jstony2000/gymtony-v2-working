@@ -1,10 +1,13 @@
 {
-  "version": "2.4.8",
-  "build": "8",
-  "codeName": "auto_navigation",
+  "version": "2.4.9",
+  "build": "9",
+  "codeName": "nav_error_fix",
   "date": "2025-11-10",
-  "description": "Navegación automática agregada - La app inicia directamente en la pantalla principal sin clic en 'Inicio'",
+  "description": "Error 404 corregido - Navegación automática problemática removida",
   "changelog": [
+    "📅 2025-11-10 09:43:00: Error 404 corregido - Navegación automática problemática removida (window.history.replaceState)",
+    "🔧 El useEffect problemático que causaba el error 404 '2.github.io' ha sido eliminado",
+    "✅ La aplicación mantiene la redirección de ruta '/training' → '/' para funcionalidad básica",
     "📅 2025-11-10 09:36:00: Navegación automática agregada - La app inicia directamente en la pantalla principal sin clic en 'Inicio'",
     "🔄 useEffect agregado para navegación automática con window.history.replaceState",
     "🔗 Nueva ruta de redirect '/training' → '/' agregada",
@@ -24,7 +27,7 @@
   "semantic": {
     "major": 2,
     "minor": 4,
-    "patch": 8,
-    "build": 8
+    "patch": 9,
+    "build": 9
   }
 }
