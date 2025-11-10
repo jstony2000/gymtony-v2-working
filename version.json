@@ -1,18 +1,15 @@
 {
   "version": "2.4.7",
   "build": "7",
-  "codeName": "auto_versioning_init",
+  "codeName": "title_simplified",
   "date": "2025-11-10",
-  "description": "Sistema de versionado automático - Build number sincronizado",
+  "description": "Título simplificado - Solo versión sin build number",
   "changelog": [
-    "📅 2025-11-10 08:37:00: Sistema de versionado automático activado",
-    "🔧 Build number ahora coincide con la versión patch",
-    "🔄 Auto-increment: v2.4.6 → v2.4.7 (Build 7)",
-    "🚀 GitHub Actions configurado para versionado automático",
-    "📱 Título actualizado a 'GymTony V2.4.7 (Build 7)'",
-    "✅ Sistema de evolución automática de versiones implementado",
-    "⚙️ Scripts de versionado automático: version-updater.js, init-auto-versioning.js",
-    "🔄 Workflow de GitHub Actions: auto-version.yml"
+    "📅 2025-11-10 08:43:00: Título simplificado - Solo versión sin build number",
+    "🔧 Formato cambiado: 'GymTony V2.4.7 (Build 7)' → 'GymTony 2.4.7'",
+    "📱 Título del navegador: 'GymTony 2.4.7'",
+    "🚀 Sistema de versionado automático sigue activo",
+    "📊 Changelog actualizado con nuevo formato"
   ],
   "author": "MiniMax Agent",
   "project": "GymTony V2",
