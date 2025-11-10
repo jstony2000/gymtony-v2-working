@@ -1,5 +1,14 @@
-// Script para forzar la limpieza del cache y recargar GymTony V2.4.6
+// Script para forzar la limpieza del cache para GymTony V2.4.6
 (function() {
+    const CURRENT_VERSION = '2.4.6';
+    const CACHE_CLEARED_KEY = 'gymtony_cache_cleared_v2_4_6';
+    
+    // Verificar si ya se ejecutó el cache clearing para esta versión
+    if (localStorage.getItem(CACHE_CLEARED_KEY) === 'true') {
+        console.log('✅ Cache ya fue limpiado para versión', CURRENT_VERSION);
+        return; // No ejecutar nuevamente
+    }
+    
     console.log('🧹 GymTony V2.4.6 - Forzando limpieza de cache...');
     
     // Limpiar localStorage de versiones anteriores
@@ -13,11 +22,9 @@
     sessionStorage.clear();
     console.log('✅ Limpiado sessionStorage');
     
-    // Forzar recarga de la página en 2 segundos
-    setTimeout(() => {
-        console.log('🔄 Recargando página con cache limpio...');
-        window.location.reload(true); // true = force reload bypassing cache
-    }, 2000);
+    // Marcar que el cache fue limpiado para esta versión
+    localStorage.setItem(CACHE_CLEARED_KEY, 'true');
+    console.log('✅ Marcado cache como limpiado para versión', CURRENT_VERSION);
     
     // Mostrar mensaje al usuario
     const message = document.createElement('div');
@@ -36,7 +43,7 @@
         box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
         animation: slideIn 0.3s ease-out;
     `;
-    message.innerHTML = '🧹 Limpiando cache... La página se recargará automáticamente';
+    message.innerHTML = '🧹 Cache limpiado para GymTony V2.4.6';
     
     // Agregar animación CSS
     const style = document.createElement('style');
