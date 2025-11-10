@@ -1,0 +1,143 @@
+name: 🚀 Auto Versioning System
+
+on:
+  push:
+    branches: [ main, master ]
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+      - 'docs/**'
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Type of version increment'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      description:
+        description: 'Description for the update'
+        required: false
+        default: 'Auto update via GitHub Actions'
+        type: string
+
+env:
+  NODE_VERSION: '18'
+  REPO_NAME: 'gymtony-v2-working'
+  GITHUB_USER: 'jstony2000'
+
+jobs:
+  auto-version:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: 🖥️ Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: 🔄 Update version automatically
+      run: |
+        # Determinar tipo de versión
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          VERSION_TYPE="${{ github.event.inputs.version_type }}"
+          DESCRIPTION="${{ github.event.inputs.description }}"
+        else
+          # Auto-detect desde commit message o usar patch por defecto
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          if [[ "$COMMIT_MSG" =~ \[major\]|\[breaking\] ]]; then
+            VERSION_TYPE="major"
+            DESCRIPTION="Breaking changes - Major release"
+          elif [[ "$COMMIT_MSG" =~ \[minor\]|\[feature\] ]]; then
+            VERSION_TYPE="minor"  
+            DESCRIPTION="New features - Minor release"
+          else
+            VERSION_TYPE="patch"
+            DESCRIPTION="Auto-patch update from commit"
+          fi
+        fi
+        
+        echo "🔄 Tipo de incremento: $VERSION_TYPE"
+        echo "📝 Descripción: $DESCRIPTION"
+        
+        # Ejecutar sistema de versionado
+        node version-updater.js "$VERSION_TYPE" "$DESCRIPTION"
+        
+        # Verificar cambios
+        if git diff --quiet; then
+          echo "ℹ️  No hay cambios para commitear"
+          exit 0
+        fi
+
+    - name: 📋 Configurar Git
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ env.GITHUB_USER }}/${{ env.REPO_NAME }}.git
+
+    - name: 📝 Commit y push cambios
+      if: success()
+      run: |
+        # Obtener nueva versión
+        CURRENT_VERSION=$(node -e "console.log(require('./version.json').version)")
+        CURRENT_BUILD=$(node -e "console.log(require('./version.json').build)")
+        
+        echo "📊 Nueva versión: $CURRENT_VERSION (Build $CURRENT_BUILD)"
+        
+        # Commit con mensaje descriptivo
+        git add .
+        git commit -m "🔖 v$CURRENT_VERSION (Build $CURRENT_BUILD): Auto-versionado del sistema"
+        
+        # Push solo si hay cambios
+        if ! git diff --staged --quiet; then
+          git push origin main
+          echo "✅ Cambios pushados exitosamente"
+        else
+          echo "ℹ️  No hay cambios para push"
+        fi
+
+    - name: 🌐 Verificar deployment
+      if: success()
+      run: |
+        echo "🚀 Deployment process initiated"
+        echo "📍 URL de GitHub Pages: https://${{ env.GITHUB_USER }}.github.io/${{ env.REPO_NAME }}/"
+        echo "⏰ GitHub Pages puede tardar 1-2 minutos en actualizarse"
+        echo ""
+        echo "💡 Sistema de versionado automático activado"
+        echo "🏷️  Build number ahora coincide con la versión patch"
+        echo "📈 Progresión: v2.4.7 (Build 7) → v2.4.8 (Build 8) → v2.4.9 (Build 9)"
+
+  notify-success:
+    if: success()
+    needs: auto-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Success notification
+        run: |
+          echo "🎉 ¡SISTEMA DE VERSIONADO AUTOMÁTICO COMPLETADO!"
+          echo "================================================"
+          echo "📍 Nueva versión desplegada automáticamente"
+          echo "🏷️  Build number sincronizado con versión patch"
+          echo "🌐 GitHub Pages se actualizará en 1-2 minutos"
+          echo "📱 La aplicación mostrará la nueva versión en el título"
+
+  notify-failure:
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: ❌ Failure notification
+        run: |
+          echo "❌ Error en el sistema de versionado automático"
+          echo "=============================================="
+          echo "🔧 Revisar los logs del workflow para detalles"
+          echo "💡 El sistema se reintentará en el próximo push"
