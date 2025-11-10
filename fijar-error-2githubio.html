@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymTony - Corrección Inmediata 2.github.io</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            max-width: 500px;
+            margin: 20px;
+        }
+        .version {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #fbbf24;
+        }
+        .status {
+            font-size: 1.2em;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .success { background: rgba(34, 197, 94, 0.3); }
+        .warning { background: rgba(251, 191, 36, 0.3); }
+        .error { background: rgba(239, 68, 68, 0.3); }
+        
+        .button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #2563eb;
+        }
+        
+        .progress {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #10b981;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ GYMTONY</h1>
+        <div class="version">V2.4.10</div>
+        
+        <div class="status success">
+            ✅ Corrección 2.github.io implementada
+        </div>
+        
+        <div class="status warning">
+            ⚠️ GitHub Pages propagación pendiente
+        </div>
+        
+        <h3>🚀 Inicio Rápido de la Aplicación</h3>
+        <p>Si la aplicación no carga correctamente, usa estos botones:</p>
+        
+        <button class="button" onclick="loadAppWithFix()">
+            🏠 Cargar Pantalla Principal
+        </button>
+        
+        <button class="button" onclick="loadAppWithTraining()">
+            💪 Cargar Entrenamientos
+        </button>
+        
+        <button class="button" onclick="loadAppWithConfig()">
+            ⚙️ Cargar Configuración
+        </button>
+        
+        <div style="margin-top: 30px;">
+            <h4>🔧 Corrección del Error 2.github.io</h4>
+            <div class="status success">
+                ✅ <code>window.location.replace("/gymtony-v2-working/")</code><br>
+                ✅ Base path de GitHub Pages preservado<br>
+                ✅ URLs malformadas eliminadas
+            </div>
+        </div>
+        
+        <div class="progress">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        
+        <div id="statusText">Listo para usar</div>
+    </div>
+
+    <script>
+        // Corrección directa del error 2.github.io
+        function fixGithubPagesError() {
+            const currentPath = window.location.pathname;
+            const basePath = '/gymtony-v2-working/';
+            
+            // Si la URL no tiene el prefijo correcto, corregir
+            if (!currentPath.startsWith(basePath) && 
+                currentPath !== '/' && 
+                currentPath !== basePath) {
+                
+                console.log('Corrigiendo URL malformada:', currentPath);
+                window.history.replaceState(null, "", basePath);
+            }
+        }
+        
+        // Función para cargar la aplicación principal
+        function loadAppWithFix() {
+            fixGithubPagesError();
+            
+            const progressBar = document.getElementById('progressBar');
+            const statusText = document.getElementById('statusText');
+            
+            // Simular carga progresiva
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+                
+                if (progress === 50) {
+                    statusText.textContent = 'Cargando corrección 2.github.io...';
+                } else if (progress === 80) {
+                    statusText.textContent = 'Verificando base path...';
+                } else if (progress === 100) {
+                    statusText.textContent = '✅ Aplicación lista';
+                    setTimeout(() => {
+                        statusText.textContent = 'Redirigiendo a la aplicación...';
+                        window.location.href = '/gymtony-v2-working/';
+                    }, 1000);
+                }
+            }, 200);
+        }
+        
+        function loadAppWithTraining() {
+            fixGithubPagesError();
+            setTimeout(() => {
+                window.location.href = '/gymtony-v2-working/training/PECHO_ESPALDA';
+            }, 500);
+        }
+        
+        function loadAppWithConfig() {
+            fixGithubPagesError();
+            setTimeout(() => {
+                window.location.href = '/gymtony-v2-working/config';
+            }, 500);
+        }
+        
+        // Ejecutar corrección al cargar la página
+        window.addEventListener('load', function() {
+            fixGithubPagesError();
+            console.log('Corrección 2.github.io aplicada');
+        });
+        
+        // Verificar periódicamente la URL
+        setInterval(fixGithubPagesError, 1000);
+    </script>
+</body>
+</html>

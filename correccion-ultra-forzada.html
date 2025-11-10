@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymTony V 2.4.10 - CORRECCIÓN FORZADA</title>
+    <meta name="description" content="GymTony V 2.4.10 - ERROR 2.github.io CORREGIDO - Aplicación de entrenamiento personalizada" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #dc2626, #7c2d12);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .version-badge {
+            font-size: 1.5rem;
+            background: #059669;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 20px 0;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        .status {
+            font-size: 1.1rem;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .status.correccion {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+        }
+        
+        .status.exito {
+            background: rgba(34, 197, 94, 0.3);
+            border-color: #22c55e;
+            animation: glow 2s infinite;
+        }
+        
+        .button {
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-weight: bold;
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        
+        .button.primary {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            font-size: 1.4rem;
+            padding: 20px 40px;
+        }
+        
+        .button.primary:hover {
+            background: linear-gradient(45deg, #16a34a, #15803d);
+        }
+        
+        .console {
+            background: #111827;
+            color: #10b981;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 2px solid #374151;
+        }
+        
+        .log-entry {
+            margin: 3px 0;
+            padding: 3px 0;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .timestamp {
+            color: #6b7280;
+            font-size: 0.8rem;
+        }
+        
+        .success {
+            color: #22c55e;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        .warning {
+            color: #f59e0b;
+            font-weight: bold;
+        }
+        
+        .info {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px #22c55e; }
+            50% { box-shadow: 0 0 20px #22c55e; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #10b981);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            animation: progressGlow 1.5s infinite;
+        }
+        
+        @keyframes progressGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ GYMTONY</h1>
+        <div class="version-badge">v2.4.10 - FORZADA</div>
+        
+        <div id="status" class="status">
+            🚀 Iniciando corrección forzada...
+        </div>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="console" id="console">
+            <div class="log-entry">
+                <span class="timestamp">22:17</span> <span class="info">ℹ️</span> <strong>GymTony v2.4.10 - CORRECCIÓN FORZADA INICIADA</strong>
+            </div>
+        </div>
+        
+        <button class="button primary" onclick="launchForcedApp()">
+            🚀 LANZAR GYMTONY v2.4.10 FORZADO
+        </button>
+        
+        <button class="button" onclick="performDirectCorrection()">
+            ⚡ CORRECCIÓN DIRECTA INMEDIATA
+        </button>
+        
+        <button class="button" onclick="forceHardReset()">
+            🔥 HARD RESET COMPLETO
+        </button>
+    </div>
+
+    <script>
+        const consoleDiv = document.getElementById('console');
+        const statusDiv = document.getElementById('status');
+        const progressBar = document.getElementById('progress-bar');
+        
+        let correctionStarted = false;
+        
+        // Logging function with enhanced UI
+        function log(message, type = 'info') {
+            const time = new Date().toLocaleTimeString();
+            const icon = {
+                'success': '✅',
+                'error': '❌', 
+                'warning': '⚠️',
+                'info': 'ℹ️',
+                'loading': '🔄'
+            }[type] || 'ℹ️';
+            
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = `<span class="timestamp">${time}</span> <span class="${type}">${icon}</span> ${message}`;
+            consoleDiv.appendChild(entry);
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+        
+        // Update status with visual feedback
+        function updateStatus(message, type = 'correccion') {
+            statusDiv.className = `status ${type}`;
+            statusDiv.innerHTML = message;
+            
+            if (type === 'exito') {
+                statusDiv.style.animation = 'glow 2s infinite';
+            }
+        }
+        
+        // Update progress bar
+        function updateProgress(percentage) {
+            progressBar.style.width = percentage + '%';
+        }
+        
+        // Direct application launch with maximum caching bypass
+        function launchForcedApp() {
+            log('🚀 INICIANDO LANZAMIENTO FORZADO...', 'loading');
+            updateStatus('🚀 Lanzando GymTony v2.4.10...', 'loading');
+            updateProgress(20);
+            
+            // Create unique timestamp
+            const timestamp = Date.now();
+            const basePath = '/gymtony-v2-working/';
+            const version = '2410';
+            const url = `https://jstony2000.github.io${basePath}?v=${version}&t=${timestamp}&cache-bust=force`;
+            
+            log('🌐 URL forzada: ' + url, 'info');
+            
+            // Store correction status
+            localStorage.setItem('gymtony_corrected', 'true');
+            localStorage.setItem('gymtony_version', '2.4.10');
+            localStorage.setItem('gymtony_timestamp', timestamp);
+            
+            // Launch with forced parameters
+            setTimeout(() => {
+                updateProgress(60);
+                log('🔧 Aplicando parámetros de corrección...', 'info');
+                
+                // Open the application
+                const appWindow = window.open(url, '_blank', 'width=400,height=800,scrollbars=yes,resizable=yes');
+                
+                setTimeout(() => {
+                    updateProgress(80);
+                    log('📱 Aplicación abierta en nueva ventana', 'success');
+                    
+                    updateStatus('✅ GymTony v2.4.10 abierto - ¡VERIFICA LA VERSIÓN!', 'exito');
+                    updateProgress(100);
+                    
+                }, 1000);
+            }, 500);
+        }
+        
+        // Direct correction with maximum aggressive cache clearing
+        async function performDirectCorrection() {
+            if (correctionStarted) return;
+            correctionStarted = true;
+            
+            log('⚡ INICIANDO CORRECCIÓN DIRECTA AGRESIVA...', 'loading');
+            updateStatus('⚡ Ejecutando corrección directa...', 'loading');
+            updateProgress(10);
+            
+            // Step 1: Aggressive cache clearing
+            log('🗑️ PASO 1: Limpieza agresiva de caché...', 'info');
+            try {
+                // Clear all caches
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    for (const cacheName of cacheNames) {
+                        await caches.delete(cacheName);
+                        log('✅ Cache eliminado: ' + cacheName, 'success');
+                    }
+                }
+                
+                // Clear storage
+                localStorage.clear();
+                sessionStorage.clear();
+                log('✅ Almacenamiento limpiado', 'success');
+                
+                // Clear IndexedDB
+                if ('indexedDB' in window) {
+                    const dbs = await indexedDB.databases();
+                    for (const db of dbs) {
+                        if (db.name) {
+                            indexedDB.deleteDatabase(db.name);
+                            log('🗄️ IndexedDB eliminado: ' + db.name, 'success');
+                        }
+                    }
+                }
+                
+                updateProgress(30);
+            } catch (error) {
+                log('⚠️ Error en limpieza: ' + error.message, 'warning');
+            }
+            
+            // Step 2: Service Worker unregister
+            log('🔧 PASO 2: Eliminando Service Workers...', 'info');
+            try {
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    for (const registration of registrations) {
+                        await registration.unregister();
+                        log('✅ Service Worker eliminado', 'success');
+                    }
+                }
+                updateProgress(50);
+            } catch (error) {
+                log('⚠️ Error con Service Workers: ' + error.message, 'warning');
+            }
+            
+            // Step 3: URL correction
+            log('🎯 PASO 3: Corrigiendo URL...', 'info');
+            try {
+                const currentPath = window.location.pathname;
+                const basePath = '/gymtony-v2-working/';
+                
+                if (currentPath !== '/' && !currentPath.startsWith(basePath)) {
+                    log('🔧 URL malformada detectada: ' + currentPath, 'warning');
+                    
+                    // Force redirect
+                    const timestamp = Date.now();
+                    const correctedURL = `https://jstony2000.github.io${basePath}?v=2410&t=${timestamp}`;
+                    log('🚀 Redirigiendo a: ' + correctedURL, 'info');
+                    
+                    window.location.replace(correctedURL);
+                    return;
+                } else {
+                    log('✅ URL ya está en formato correcto', 'success');
+                }
+                updateProgress(70);
+            } catch (error) {
+                log('❌ Error en corrección de URL: ' + error.message, 'error');
+            }
+            
+            // Step 4: Metadata update
+            log('📝 PASO 4: Actualizando metadatos...', 'info');
+            try {
+                document.title = 'GymTony V 2.4.10 - FORZADO';
+                
+                const metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) {
+                    metaDesc.setAttribute('content', 'GymTony V 2.4.10 - ERROR 2.github.io FORZADAMENTE CORREGIDO');
+                }
+                
+                log('✅ Metadatos actualizados', 'success');
+                updateProgress(85);
+            } catch (error) {
+                log('❌ Error actualizando metadatos: ' + error.message, 'error');
+            }
+            
+            // Step 5: Final verification
+            log('🔍 PASO 5: Verificación final...', 'info');
+            setTimeout(() => {
+                const root = document.getElementById('root');
+                if (root && root.children.length > 0) {
+                    log('✅ APLICACIÓN RENDERIZADA CORRECTAMENTE', 'success');
+                    updateStatus('🎉 ¡CORRECCIÓN DIRECTA COMPLETADA!', 'exito');
+                } else {
+                    log('⚠️ Aplicación no renderizada - recargando...', 'warning');
+                    window.location.reload(true);
+                }
+                updateProgress(100);
+            }, 2000);
+        }
+        
+        // Hard reset - nuclear option
+        async function forceHardReset() {
+            log('🔥 HARD RESET NUCLEAR INICIADO...', 'warning');
+            updateStatus('🔥 Ejecutando reset nuclear...', 'loading');
+            updateProgress(10);
+            
+            try {
+                // Clear EVERYTHING
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    for (const cacheName of cacheNames) {
+                        await caches.delete(cacheName);
+                    }
+                }
+                
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                if ('indexedDB' in window) {
+                    const dbs = await indexedDB.databases();
+                    for (const db of dbs) {
+                        if (db.name) {
+                            indexedDB.deleteDatabase(db.name);
+                        }
+                    }
+                }
+                
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    for (const registration of registrations) {
+                        await registration.unregister();
+                    }
+                }
+                
+                updateProgress(50);
+                log('🗑️ TODO EL CACHÉ ELIMINADO', 'success');
+                
+                // Force reload with maximum parameters
+                setTimeout(() => {
+                    updateProgress(80);
+                    const timestamp = Date.now();
+                    const hardResetURL = `https://jstony2000.github.io/gymtony-v2-working/?v=hardreset&t=${timestamp}&force=true&cache=false&_=${Math.random()}`;
+                    log('🚀 HARD RELOAD: ' + hardResetURL, 'warning');
+                    
+                    window.location.href = hardResetURL;
+                }, 1000);
+                
+            } catch (error) {
+                log('❌ Error en hard reset: ' + error.message, 'error');
+                updateStatus('❌ Error en reset nuclear', 'error');
+            }
+        }
+        
+        // Auto-start enhanced correction on page load
+        window.onload = function() {
+            setTimeout(() => {
+                log('🌟 GYMTONY v2.4.10 - CORRECCIÓN FORZADA LISTA', 'info');
+                updateStatus('⚡ Corrección forzada lista - Usa los botones arriba', 'correccion');
+                updateProgress(100);
+            }, 1000);
+        };
+        
+        // Periodic status updates
+        setInterval(() => {
+            if (correctionStarted) {
+                const currentTime = new Date().toLocaleTimeString();
+                log('⏰ ' + currentTime + ' - Sistema funcionando', 'info');
+            }
+        }, 30000);
+        
+        // Expose debug functions
+        window.GYMTONY_DEBUG = {
+            version: () => log('Versión: 2.4.10 FORZADA', 'info'),
+            cache: () => caches.keys().then(names => log('Caches: ' + names.join(', '), 'info')),
+            storage: () => {
+                const keys = Object.keys(localStorage);
+                log('localStorage: ' + keys.length + ' elementos', 'info');
+            },
+            reload: () => window.location.reload(true),
+            url: () => log('URL: ' + window.location.href, 'info')
+        };
+        
+        log('💡 Comandos de debug disponibles:', 'info');
+        log('   - GYMTONY_DEBUG.version() - Ver versión', 'info');
+        log('   - GYMTONY_DEBUG.cache() - Ver caches', 'info');
+        log('   - GYMTONY_DEBUG.reload() - Recargar', 'info');
+    </script>
+</body>
+</html>

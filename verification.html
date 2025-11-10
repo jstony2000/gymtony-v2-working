@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔍 Verificación GymTony V2.4.3</title>
+    <title>🔍 Verificación GymTony V2.4.10 - CORRECCIÓN 2.GITHUB.IO</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -84,11 +84,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>🔍 GYMTONY V2.4.3 - VERIFICACIÓN DE DEPLOY</h1>
+        <h1>🔍 GYMTONY V2.4.10 - DEPLOY CON CORRECCIÓN 2.GITHUB.IO</h1>
         
         <div class="test">
             <h3 class="info">📱 URL a verificar:</h3>
-            <input type="text" id="urlInput" class="url-input" value="https://jstony2000.github.io/gymtony-v2-4-3/">
+            <input type="text" id="urlInput" class="url-input" value="https://jstony2000.github.io/gymtony-v2-working/">
             <button class="button" onclick="checkAll()">🚀 INICIAR VERIFICACIÓN</button>
         </div>
 
@@ -108,26 +108,36 @@
             </div>
 
             <div class="test">
-                <h3>3. 🎨 Verificar logos rojos</h3>
-                <div id="logosResult" class="loading">⏳ Verificando...</div>
+                <h3>3. 🛠️ Verificar corrección error 2.github.io</h3>
+                <div id="errorResult" class="loading">⏳ Verificando corrección del error 2.github.io...</div>
             </div>
 
             <div class="test">
-                <h3>4. 📱 Verificar PWA manifest</h3>
+                <h4>📝 Cambios en v2.4.10:</h4>
+                <ul style="text-align: left; color: #00ff00;">
+                    <li>✅ window.location.replace("/gymtony-v2-working/")</li>
+                    <li>✅ useEffect route validation corregido</li>
+                    <li>✅ GitHub Pages base path preservado</li>
+                    <li>✅ Cache busting implementado</li>
+                </ul>
+            </div>
+
+            <div class="test">
+                <h4>📱 Verificar PWA manifest</h4>
                 <div id="manifestResult" class="loading">⏳ Verificando...</div>
             </div>
 
             <div class="test">
-                <h3>5. 🔄 Tiempo de propagación</h3>
+                <h5>🔄 Tiempo de propagación</h5>
                 <div id="timeResult" class="info">⏰ Calculando...</div>
             </div>
         </div>
 
         <div class="test">
             <h3 class="success">📋 INSTRUCCIONES PARA APK</h3>
-            <p><strong>URL para PWABuilder:</strong> <span id="pwabuilderUrl" style="color: #ffaa00;">https://jstony2000.github.io/gymtony-v2-4-3/</span></p>
+            <p><strong>URL para PWABuilder:</strong> <span id="pwabuilderUrl" style="color: #ffaa00;">https://jstony2000.github.io/gymtony-v2-working/</span></p>
             <p>1. Ir a: <strong>https://pwabuilder.com</strong></p>
-            <p>2. Ingresar URL: <strong>https://jstony2000.github.io/gymtony-v2-4-3/</strong></p>
+            <p>2. Ingresar URL: <strong>https://jstony2000.github.io/gymtony-v2-working/</strong></p>
             <p>3. Clic en: <strong>"Start"</strong></p>
             <p>4. Seleccionar: <strong>"Android"</strong></p>
             <p>5. Descargar: <strong>"Download Package"</strong></p>
@@ -193,22 +203,37 @@
                 });
         }
         
-        function checkLogos() {
-            const logoUrl = document.getElementById('urlInput').value + 'logo-red-192x192.png';
-            fetch(logoUrl, { method: 'HEAD' })
+        function checkError2Github() {
+            fetch('https://jstony2000.github.io/gymtony-v2-working/')
                 .then(response => {
                     testCount++;
                     updateProgress();
                     if (response.ok) {
-                        document.getElementById('logosResult').innerHTML = '✅ <span class="success">LOGOS ROJOS DISPONIBLES - logo-red-192x192.png accesible</span>';
+                        return response.text();
                     } else {
                         throw new Error('HTTP ' + response.status);
+                    }
+                })
+                .then(data => {
+                    // Verificar que la versión sea 2.4.10
+                    const hasV210 = data.includes('2.4.10') || data.includes('V 2.4.10');
+                    // Verificar que no haya error 2.github.io
+                    const noError2github = !data.includes('2.github.io');
+                    // Verificar que la aplicación carga correctamente
+                    const appLoads = data.includes('GymTony') || data.includes('index-FnI7mOub.js');
+                    
+                    if (hasV210 && noError2github && appLoads) {
+                        document.getElementById('errorResult').innerHTML = '✅ <span class="success">ERROR 2.GITHUB.IO CORREGIDO - v2.4.10 funcionando</span>';
+                    } else if (hasV210) {
+                        document.getElementById('errorResult').innerHTML = '⚠️ <span class="info">v2.4.10 detectada, pero verificar carga de aplicación</span>';
+                    } else {
+                        document.getElementById('errorResult').innerHTML = '❌ <span class="error">Error 2.github.io puede persistir - verificar despliegue</span>';
                     }
                 })
                 .catch(error => {
                     testCount++;
                     updateProgress();
-                    document.getElementById('logosResult').innerHTML = '❌ <span class="error">Error logos: ' + error.message + '</span>';
+                    document.getElementById('errorResult').innerHTML = '❌ <span class="error">Error verificando corrección: ' + error.message + '</span>';
                 });
         }
         
@@ -238,7 +263,7 @@
         }
         
         function checkTime() {
-            const deployTime = new Date('2025-11-08T07:08:03');
+            const deployTime = new Date('2025-11-10T09:58:20');
             const now = new Date();
             const diffMinutes = Math.floor((now - deployTime) / 60000);
             
@@ -263,7 +288,7 @@
             document.getElementById('progressBar').style.width = '0%';
             document.getElementById('homepageResult').innerHTML = '⏳ Verificando...';
             document.getElementById('scriptResult').innerHTML = '⏳ Verificando...';
-            document.getElementById('logosResult').innerHTML = '⏳ Verificando...';
+            document.getElementById('errorResult').innerHTML = '⏳ Verificando corrección 2.github.io...';
             document.getElementById('manifestResult').innerHTML = '⏳ Verificando...';
             document.getElementById('timeResult').innerHTML = '⏰ Calculando...';
             
@@ -274,7 +299,7 @@
             // Run all checks
             setTimeout(checkHomepage, 100);
             setTimeout(checkScript, 300);
-            setTimeout(checkLogos, 500);
+            setTimeout(checkError2Github, 500);
             setTimeout(checkManifest, 700);
             setTimeout(checkTime, 900);
         }
