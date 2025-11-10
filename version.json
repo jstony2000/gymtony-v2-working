@@ -1,10 +1,14 @@
 {
-  "version": "2.4.7",
-  "build": "7",
-  "codeName": "title_simplified",
+  "version": "2.4.8",
+  "build": "8",
+  "codeName": "auto_navigation",
   "date": "2025-11-10",
-  "description": "Título actualizado con V y espaciado - 'GymTony V 2.4.7'",
+  "description": "Navegación automática agregada - La app inicia directamente en la pantalla principal sin clic en 'Inicio'",
   "changelog": [
+    "📅 2025-11-10 09:36:00: Navegación automática agregada - La app inicia directamente en la pantalla principal sin clic en 'Inicio'",
+    "🔄 useEffect agregado para navegación automática con window.history.replaceState",
+    "🔗 Nueva ruta de redirect '/training' → '/' agregada",
+    "🎯 App ahora inicia automáticamente en la pantalla principal",
     "📅 2025-11-10 09:17:00: Título actualizado con V y espaciado - 'GymTony V 2.4.7'",
     "🔧 Formato actualizado: 'GymTony 2.4.7' → 'GymTony V 2.4.7'",
     "📱 Título del navegador: 'GymTony V 2.4.7'",
@@ -20,7 +24,7 @@
   "semantic": {
     "major": 2,
     "minor": 4,
-    "patch": 7,
-    "build": 7
+    "patch": 8,
+    "build": 8
   }
 }
