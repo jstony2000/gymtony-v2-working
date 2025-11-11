@@ -2,199 +2,103 @@
     <!-- Header -->
     <div class="header">
         <h1>🏋️ GymTony V2</h1>
-        <div class="version-badge">V 2.4.10 - CORRECCIÓN ACTIVA</div>
-        <p>Tu aplicación de entrenamiento personalizada</p>
+        <div class="version-badge">V 2.4.10</div>
+        <p style="margin-top: 15px; opacity: 0.8;">Tu aplicación de entrenamiento personalizada</p>
     </div>
 
-    <!-- Status -->
-    <div class="status">
-        <h3>✅ Sistema Funcionando Correctamente</h3>
-        <p>🔧 Error 2.github.io CORREGIDO • 🚀 Deployment v2.4.10 ACTIVO</p>
+    <!-- Instruction -->
+    <div class="instruction">
+        <p>Selecciona tu grupo muscular para comenzar</p>
     </div>
 
     <!-- Main Groups -->
-    <div id="main-groups" class="groups-grid">
-        <div class="group-card" onclick="selectGroup('pecho')">
+    <div class="groups-grid">
+        <div class="group-card pecho" onclick="startTraining('PECHO')">
             <div class="group-icon">💪</div>
-            <div class="group-title">Pecho</div>
-            <div class="group-desc">Desarrollo y fortalecimiento del pectoral</div>
-            <div style="margin-top: 10px; opacity: 0.7;">15 ejercicios disponibles</div>
+            <div class="group-title">PECHO</div>
+            <div class="group-desc">Desarrollo completo de pectorales, tríceps y hombros</div>
+            <div class="group-count">🔥 Ejercicios especializados incluidos</div>
         </div>
 
-        <div class="group-card" onclick="selectGroup('espalda')">
-            <div class="group-icon">🏋️</div>
-            <div class="group-title">Espalda</div>
-            <div class="group-desc">Fortalecimiento y definición de la espalda</div>
-            <div style="margin-top: 10px; opacity: 0.7;">18 ejercicios disponibles</div>
-        </div>
-
-        <div class="group-card" onclick="selectGroup('brazos')">
+        <div class="group-card brazo" onclick="startTraining('BRAZO')">
             <div class="group-icon">💪</div>
-            <div class="group-title">Brazos</div>
-            <div class="group-desc">Tren superior y desarrollo muscular</div>
-            <div style="margin-top: 10px; opacity: 0.7;">20 ejercicios disponibles</div>
+            <div class="group-title">BRAZO</div>
+            <div class="group-desc">Fortalecimiento de bíceps, tríceps, antebrazos y hombros</div>
+            <div class="group-count">⚡ Ejercicios especializados incluidos</div>
         </div>
 
-        <div class="group-card" onclick="selectGroup('piernas')">
+        <div class="group-card pierna" onclick="startTraining('PIERNA')">
             <div class="group-icon">🦵</div>
-            <div class="group-title">Piernas</div>
-            <div class="group-desc">Fuerza y resistencia en tren inferior</div>
-            <div style="margin-top: 10px; opacity: 0.7;">22 ejercicios disponibles</div>
-        </div>
-
-        <div class="group-card" onclick="selectGroup('core')">
-            <div class="group-icon">🧘</div>
-            <div class="group-title">Core</div>
-            <div class="group-desc">Abdomen y fortalecimiento central</div>
-            <div style="margin-top: 10px; opacity: 0.7;">12 ejercicios disponibles</div>
-        </div>
-
-        <div class="group-card" onclick="selectGroup('cardio')">
-            <div class="group-icon">🏃</div>
-            <div class="group-title">Cardio</div>
-            <div class="group-desc">Ejercicios cardiovasculares</div>
-            <div style="margin-top: 10px; opacity: 0.7;">10 ejercicios disponibles</div>
-        </div>
-    </div>
-
-    <!-- Group Details -->
-    <div id="group-details" style="display: none;">
-        <div class="header">
-            <h1 id="group-title">Grupo</h1>
-            <button class="back-btn" onclick="goBack()">← Volver a Grupos</button>
-        </div>
-        
-        <div id="exercises-container" class="groups-grid">
-            <!-- Ejercicios se cargan dinámicamente -->
+            <div class="group-title">PIERNA</div>
+            <div class="group-desc">Desarrollo de cuádriceps, isquiotibiales y glúteos</div>
+            <div class="group-count">🏃 Ejercicios especializados incluidos</div>
         </div>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-        <h3>🏆 GymTony V2.4.10 - DESARROLLO COMPLETO</h3>
-        <p>✅ Error 2.github.io resuelto | ✅ Navegación automática activa | ✅ Todas las funcionalidades operativas</p>
-        <p style="margin-top: 10px; opacity: 0.7;">Desarrollado con ❤️ para tu entrenamiento personal</p>
+        <h3>🏆 GymTony V2.4.10 - APLICACIÓN ORIGINAL</h3>
+        <p>✅ Versión original restaurada • 🎨 Fondo azul oscuro • 🔴💙🟢 Colores originales • ⚙️ Solo título corregido</p>
+        <p style="margin-top: 15px; opacity: 0.7;">GymTony V2 - Velocidad optimizada</p>
     </div>
 </div>
 
 <script>
-    // Debug v2.4.10
-    console.log('🚀 GYMTONY V2.4.10 - APlicación cargada correctamente');
-    console.log('✅ Error 2.github.io CORREGIDO');
-    console.log('📱 Navegación automática ACTIVA');
+    console.log('🚀 GYMTONY V2.4.10 - APLICACIÓN ORIGINAL EXACTA');
+    console.log('✅ Versión del APK restaurada');
+    console.log('🎨 3 grupos: PECHO (rojo), BRAZO (azul), PIERNA (verde)');
 
-    // Datos de ejercicios
-    const exercises = {
-        pecho: [
-            { name: 'Press de banca', description: 'Ejercicio fundamental para pectorales' },
-            { name: 'Press inclinado', description: 'Enfoque en parte superior del pectoral' },
-            { name: 'Press declinado', description: 'Desarrollo de pectoral inferior' },
-            { name: 'Flexiones', description: 'Ejercicio bodyweight para pectorales' },
-            { name: 'Aperturas con mancuernas', description: 'Ejercicio de aislamiento' }
-        ],
-        espalda: [
-            { name: 'Dominadas', description: 'Desarrollo de dorsales y bíceps' },
-            { name: 'Remo con mancuernas', description: 'Fortalecimiento de espalda' },
-            { name: 'Press detrás de cuello', description: 'Desarrollo de deltoides' },
-            { name: 'Remo en polea baja', description: 'Aislamiento de espalda media' },
-            { name: 'Hiperextensiones', description: 'Fortalecimiento de zona lumbar' }
-        ],
-        brazos: [
-            { name: 'Curl de bíceps', description: 'Desarrollo de bíceps' },
-            { name: 'Press francés', description: 'Desarrollo de tríceps' },
-            { name: 'Martillo con mancuernas', description: 'Trabajo de antebrazos' },
-            { name: 'Fondos en paralelas', description: 'Aislamiento de tríceps' },
-            { name: 'Curl concentrado', description: 'Precisión en bíceps' }
-        ],
-        piernas: [
-            { name: 'Sentadillas', description: 'Ejercicio fundamental para piernas' },
-            { name: 'Peso muerto', description: 'Trabajo de cadena posterior' },
-            { name: 'Prensa de piernas', description: 'Desarrollo de cuádriceps' },
-            { name: 'Zancadas', description: 'Equilibrio y unilateral' },
-            { name: 'Extensiones de cuádriceps', description: 'Aislamiento de cuádriceps' }
-        ],
-        core: [
-            { name: 'Abdominales', description: 'Fortalece el recto abdominal' },
-            { name: 'Plancha', description: 'Estabilidad del core' },
-            { name: 'Bicicleta', description: 'Oblicuos y recto abdominal' },
-            { name: 'Mountain climbers', description: 'Cardio + core' },
-            { name: 'Russian twists', description: 'Rotación del core' }
-        ],
-        cardio: [
-            { name: 'Burpees', description: 'Ejercicio de cuerpo completo' },
-            { name: 'Jumping jacks', description: 'Calentamiento cardiovascular' },
-            { name: 'High knees', description: 'Elevación de rodillas' },
-            { name: 'Jump rope', description: 'Salto de cuerda' },
-            { name: 'Sprint', description: 'Velocidad y resistencia' }
-        ]
-    };
-
-    // Función para seleccionar grupo
-    function selectGroup(groupName) {
-        const groupData = exercises[groupName];
-        if (!groupData) return;
-
-        // Ocultar grupos principales
-        document.getElementById('main-groups').style.display = 'none';
-        
-        // Mostrar detalles del grupo
-        const detailsDiv = document.getElementById('group-details');
-        const titleDiv = document.getElementById('group-title');
-        const exercisesContainer = document.getElementById('exercises-container');
-        
-        // Título del grupo
-        const groupTitles = {
-            pecho: '💪 Grupo Pecho',
-            espalda: '🏋️ Grupo Espalda', 
-            brazos: '💪 Grupo Brazos',
-            piernas: '🦵 Grupo Piernas',
-            core: '🧘 Grupo Core',
-            cardio: '🏃 Grupo Cardio'
+    function startTraining(group) {
+        const groups = {
+            'PECHO': {
+                name: 'PECHO',
+                color: 'rojo',
+                exercises: [
+                    'Press de banca con barra',
+                    'Press inclinado con mancuernas', 
+                    'Aperturas con mancuernas',
+                    'Flexiones diamante',
+                    'Press declinado',
+                    'Cruces en polea'
+                ]
+            },
+            'BRAZO': {
+                name: 'BRAZO',
+                color: 'azul',
+                exercises: [
+                    'Curl de bíceps con barra',
+                    'Press francés',
+                    'Fondos en paralelas',
+                    'Elevaciones laterales',
+                    'Curl martillo',
+                    'Extensiones de tríceps'
+                ]
+            },
+            'PIERNA': {
+                name: 'PIERNA',
+                color: 'verde',
+                exercises: [
+                    'Sentadillas con barra',
+                    'Peso muerto convencional',
+                    'Prensa de piernas',
+                    'Zancadas con peso',
+                    'Extensiones de cuádriceps',
+                    'Curl femoral'
+                ]
+            }
         };
         
-        titleDiv.textContent = groupTitles[groupName];
+        const groupData = groups[group];
+        if (!groupData) return;
         
-        // Crear ejercicios
-        exercisesContainer.innerHTML = '';
-        groupData.forEach(exercise => {
-            const exerciseCard = document.createElement('div');
-            exerciseCard.className = 'group-card active-group';
-            exerciseCard.style.cursor = 'default';
-            exerciseCard.innerHTML = `
-                <div class="group-icon">🏆</div>
-                <div class="group-title">${exercise.name}</div>
-                <div class="group-desc">${exercise.description}</div>
-                <button onclick="startExercise('${exercise.name}')" 
-                        style="margin-top: 10px; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                    ▶️ Iniciar Ejercicio
-                </button>
-            `;
-            exercisesContainer.appendChild(exerciseCard);
-        });
+        showToast(`Iniciando entrenamiento: ${groupData.name}`);
         
-        detailsDiv.style.display = 'block';
-        
-        // Toast de confirmación
-        showToast(`Ejercicios de ${groupName} cargados correctamente`);
-    }
-
-    // Función para volver
-    function goBack() {
-        document.getElementById('main-groups').style.display = 'grid';
-        document.getElementById('group-details').style.display = 'none';
-    }
-
-    // Función para iniciar ejercicio
-    function startExercise(exerciseName) {
-        showToast(`Iniciando: ${exerciseName}`);
-        
-        // Simular inicio de ejercicio
         setTimeout(() => {
-            alert(`🏆 ¡Ejercicio: ${exerciseName}!\n\n✅ Preparado para comenzar\n⏱️ Tiempo recomendado: 3 series x 12 repeticiones\n\n¡Demuestra tu fuerza! 💪`);
+            const exercisesList = groupData.exercises.map((ex, i) => `${i+1}. ${ex}`).join('\n');
+            alert(`🏋️ ${groupData.name}\n\nEjercicios disponibles:\n\n${exercisesList}\n\n⏱️ Recomendación: 3 series x 10-12 repeticiones\n🔥 Intensidad progresiva\n\n¡Demuestra tu fuerza! 💪`);
         }, 500);
     }
 
-    // Función para mostrar toast
     function showToast(message) {
         const toast = document.getElementById('toast');
         toast.textContent = message;
@@ -202,17 +106,27 @@
         
         setTimeout(() => {
             toast.classList.remove('show');
-        }, 3000);
+        }, 3500);
     }
 
     // Inicialización
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('✅ DOM cargado correctamente');
+        console.log('✅ Aplicación original cargada correctamente');
         console.log('🏋️ GymTony V2.4.10 - Listo para entrenar');
         
-        // Mostrar mensaje de éxito
         setTimeout(() => {
-            showToast('🏋️ GymTony V2.4.10 - ¡Aplicación cargada!');
-        }, 1000);
+            showToast('🏋️ GymTony V2.4.10 - ¡Aplicación original!');
+        }, 1200);
+    });
+
+    // Efectos de hover mejorados
+    document.querySelectorAll('.group-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.filter = 'brightness(1.1)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.filter = 'brightness(1)';
+        });
     });
 </script>
