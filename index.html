@@ -1,132 +1,154 @@
-<div class="container">
-    <!-- Header -->
-    <div class="header">
-        <h1>🏋️ GymTony V2</h1>
-        <div class="version-badge">V 2.4.10</div>
-        <p style="margin-top: 15px; opacity: 0.8;">Tu aplicación de entrenamiento personalizada</p>
-    </div>
-
-    <!-- Instruction -->
-    <div class="instruction">
-        <p>Selecciona tu grupo muscular para comenzar</p>
-    </div>
-
-    <!-- Main Groups -->
-    <div class="groups-grid">
-        <div class="group-card pecho" onclick="startTraining('PECHO')">
-            <div class="group-icon">💪</div>
-            <div class="group-title">PECHO</div>
-            <div class="group-desc">Desarrollo completo de pectorales, tríceps y hombros</div>
-            <div class="group-count">🔥 Ejercicios especializados incluidos</div>
-        </div>
-
-        <div class="group-card brazo" onclick="startTraining('BRAZO')">
-            <div class="group-icon">💪</div>
-            <div class="group-title">BRAZO</div>
-            <div class="group-desc">Fortalecimiento de bíceps, tríceps, antebrazos y hombros</div>
-            <div class="group-count">⚡ Ejercicios especializados incluidos</div>
-        </div>
-
-        <div class="group-card pierna" onclick="startTraining('PIERNA')">
-            <div class="group-icon">🦵</div>
-            <div class="group-title">PIERNA</div>
-            <div class="group-desc">Desarrollo de cuádriceps, isquiotibiales y glúteos</div>
-            <div class="group-count">🏃 Ejercicios especializados incluidos</div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <h3>🏆 GymTony V2.4.10 - APLICACIÓN ORIGINAL</h3>
-        <p>✅ Versión original restaurada • 🎨 Fondo azul oscuro • 🔴💙🟢 Colores originales • ⚙️ Solo título corregido</p>
-        <p style="margin-top: 15px; opacity: 0.7;">GymTony V2 - Velocidad optimizada</p>
-    </div>
-</div>
-
-<script>
-    console.log('🚀 GYMTONY V2.4.10 - APLICACIÓN ORIGINAL EXACTA');
-    console.log('✅ Versión del APK restaurada');
-    console.log('🎨 3 grupos: PECHO (rojo), BRAZO (azul), PIERNA (verde)');
-
-    function startTraining(group) {
-        const groups = {
-            'PECHO': {
-                name: 'PECHO',
-                color: 'rojo',
-                exercises: [
-                    'Press de banca con barra',
-                    'Press inclinado con mancuernas', 
-                    'Aperturas con mancuernas',
-                    'Flexiones diamante',
-                    'Press declinado',
-                    'Cruces en polea'
-                ]
-            },
-            'BRAZO': {
-                name: 'BRAZO',
-                color: 'azul',
-                exercises: [
-                    'Curl de bíceps con barra',
-                    'Press francés',
-                    'Fondos en paralelas',
-                    'Elevaciones laterales',
-                    'Curl martillo',
-                    'Extensiones de tríceps'
-                ]
-            },
-            'PIERNA': {
-                name: 'PIERNA',
-                color: 'verde',
-                exercises: [
-                    'Sentadillas con barra',
-                    'Peso muerto convencional',
-                    'Prensa de piernas',
-                    'Zancadas con peso',
-                    'Extensiones de cuádriceps',
-                    'Curl femoral'
-                ]
-            }
-        };
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    
+    <!-- Meta tags para PWA -->
+    <meta name="theme-color" content="#dc2626" />
+    <meta name="description" content="GymTony V2.4.3 - Aplicación de entrenamiento personalizada para Android" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="GymTony" />
+    <meta name="msapplication-TileColor" content="#dc2626" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    
+    <!-- Iconos -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="apple-touch-icon" href="/PECHO.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/PECHO.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/PECHO.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="/PECHO.png" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Título optimizado para móvil -->
+    <title>GymTony V2.4.3 - Entrenamiento Móvil</title>
+    
+    <!-- Estilos adicionales para móvil -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
         
-        const groupData = groups[group];
-        if (!groupData) return;
+        /* Pantalla de carga para móvil */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
         
-        showToast(`Iniciando entrenamiento: ${groupData.name}`);
+        .loading-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
         
-        setTimeout(() => {
-            const exercisesList = groupData.exercises.map((ex, i) => `${i+1}. ${ex}`).join('\n');
-            alert(`🏋️ ${groupData.name}\n\nEjercicios disponibles:\n\n${exercisesList}\n\n⏱️ Recomendación: 3 series x 10-12 repeticiones\n🔥 Intensidad progresiva\n\n¡Demuestra tu fuerza! 💪`);
-        }, 500);
-    }
-
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
+        .loading-text {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
         
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3500);
-    }
-
-    // Inicialización
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('✅ Aplicación original cargada correctamente');
-        console.log('🏋️ GymTony V2.4.10 - Listo para entrenar');
+        .loading-version {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
         
-        setTimeout(() => {
-            showToast('🏋️ GymTony V2.4.10 - ¡Aplicación original!');
-        }, 1200);
-    });
-
-    // Efectos de hover mejorados
-    document.querySelectorAll('.group-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.filter = 'brightness(1.1)';
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Ocultar loading cuando la app esté lista */
+        .app-ready .loading-screen {
+            display: none;
+        }
+        
+        /* Optimizaciones para pantallas táctiles */
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        input, textarea {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+    </style>
+    
+    <!-- Scripts principales -->
+    <script type="module" crossorigin src="/assets/index-FnI7mOub.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dz4_iI-q.css">
+    
+    <!-- Service Worker para PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registrado con éxito:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('SW falló:', error);
+                    });
+            });
+        }
+        
+        // Ocultar loading cuando la app esté lista
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.body.classList.add('app-ready');
+            }, 1000);
         });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.filter = 'brightness(1)';
-        });
-    });
-</script>
+    </script>
+</head>
+<body>
+    <!-- Pantalla de carga para móvil -->
+    <div class="loading-screen" id="loading">
+        <div class="loading-logo">
+            <img src="/PECHO.png" alt="GymTony" style="width: 80px; height: 80px; object-fit: contain;" />
+        </div>
+        <div class="loading-text">GymTony</div>
+        <div class="loading-version">V2.4.3 Móvil</div>
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Contenedor principal de la app -->
+    <div id="root"></div>
+</body>
+</html>
